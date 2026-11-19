@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PANZERFRAME パーツ一覧 [2本篇]</title>
+  <link rel="stylesheet" href="../static/stylesheet/style.css">
+  <link rel="icon" href="../static/image/favicon.ico">
+</head>
+<body>
+  <div id="wrapper">
+    <header id="HEADER">
+      <div>
+        <h1 id="SITETITLE">
+          <a href="../index.html">PANZERFRAME</a>
+          パーツ一覧 [2本篇]
+        </h1>
+      </div>
+    </header>
+
+    <article id="ARTICLE">
+      <div id="PARTSDATA">
+        <div id="LIST"></div>
+      </div>
+    </article>
+
+    <footer id="FOOTER">
+      <div>
+        <nav id="MAINNAV">
+          <table class="borderbox">
+            <thead><tr><th colspan="2">ナビゲーション</th></tr></thead>
+            <tbody>
+              <tr>
+                <th>カスタマイズ</th>
+                <td>
+                  <span class="disabled">序章篇</span> -
+                  <span class="disabled">本篇</span> -
+                  <span class="disabled">BT</span> -
+                  <a href="../customize/SLPM65199.html">コバルト小隊篇</a> -
+                  <span class="disabled">2序章篇</span> -
+                  <a href="../customize/SLPM65343.html">2本篇</a>
+                </td>
+              </tr>
+              <tr>
+                <th>パーツ一覧</th>
+                <td>
+                  <span class="disabled">序章篇</span> -
+                  <span class="disabled">本篇</span> -
+                  <span class="disabled">BT</span> -
+                  <span class="disabled">コバルト小隊篇</span> -
+                  <span class="disabled">2序章篇</span> -
+                  <a href="SLPM65343.html">2本篇</a>
+                </td>
+              </tr>
+              <tr>
+                <th>サルベージ</th>
+                <td>
+                  <a href="../salvage/SLPS20075.html">序章篇</a> -
+                  <a href="../salvage/SLPM65033.html">本篇</a> -
+                  <a href="../salvage/SLPM65123.html">BT</a> -
+                  <a href="../salvage/SLPM65199.html">コバルト小隊篇</a> -
+                  <a href="../salvage/SLPM62339.html">2序章篇</a> -
+                  <a href="../salvage/SLPM65343.html">2本篇</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </nav>
+        <p><small>&copy; 2012–2026 ALNAME</small></p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../static/customize/J2Data.js"></script>
+  <script>
+    function htmlFormat() {
+      for (var x in data) {
+        var t = data[x];
+        var frame = document.createElement("section");
+        document.getElementById("LIST").appendChild(frame);
+
+        var header = document.createElement("h1");
+        frame.appendChild(header);
+
+        var table = document.createElement("table");
+        frame.appendChild(table);
+
+        switch (x) {
+          case "head":
+            header.innerHTML = "ヘッドフレーム";
+            var sheet = ["名前", "コメント", "", "重量", "EP", "外装HP", "防御力", "ロックオンスピード", "", ""];
+            for (var i = 0; i < t.length; i++) {
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              for (var n = 0; n < t[i].length; n++) {
+                if (sheet[n] !== "") {
+                  var td = document.createElement("td");
+                  tr.appendChild(td);
+                  if (n === 1) {
+                    td.style.display = "none";
+                  } else {
+                    td.innerHTML = t[i][n];
+                  }
+                }
+              }
+            }
+            break;
+          case "main":
+            header.innerHTML = "メインフレーム";
+            for (var i = 0; i < t.length; i++) {
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              for (var n = 0; n < t[i].length; n++) {
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                if (n === 1) td.style.display = "none";
+                else td.innerHTML = t[i][n];
+              }
+            }
+            break;
+          case "arm":
+            header.innerHTML = "アームフレーム";
+            for (var i = 0; i < t.length; i++) {
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              for (var n = 0; n < t[i].length; n++) {
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                if (n === 1) td.style.display = "none";
+                else td.innerHTML = t[i][n];
+              }
+            }
+            break;
+          case "leg":
+            header.innerHTML = "レッグフレーム";
+            for (var i = 0; i < t.length; i++) {
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              for (var n = 0; n < t[i].length; n++) {
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                if (n === 1) td.style.display = "none";
+                else td.innerHTML = t[i][n];
+              }
+            }
+            break;
+          case "hundWeapon":
+            header.innerHTML = "腕兵器";
+            for (var i = 0; i < t.length; i++) {
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              for (var n = 0; n < t[i].length; n++) {
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                if (n === 1) td.style.display = "none";
+                else td.innerHTML = t[i][n];
+              }
+            }
+            break;
+          case "shoulderWeapon":
+            header.innerHTML = "肩兵器";
+            for (var i = 0; i < t.length; i++) {
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              for (var n = 0; n < t[i].length; n++) {
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                if (n === 1) td.style.display = "none";
+                else td.innerHTML = t[i][n];
+              }
+            }
+            break;
+          case "material":
+            header.innerHTML = "マテリアル";
+            for (var i = 0; i < t.length; i++) {
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              for (var n = 0; n < t[i].length; n++) {
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                if (n === 1) td.style.display = "none";
+                else td.innerHTML = t[i][n];
+              }
+            }
+            break;
+          case "booster":
+            header.innerHTML = "ブースター";
+            for (var i = 0; i < t.length; i++) {
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              for (var n = 0; n < t[i].length; n++) {
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                if (n === 1) td.style.display = "none";
+                else td.innerHTML = t[i][n];
+              }
+            }
+            break;
+          case "innerBox":
+            header.innerHTML = "インナーBOX";
+            for (var i = 0; i < t.length; i++) {
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              for (var n = 0; n < t[i].length; n++) {
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                if (n === 1) td.style.display = "none";
+                else td.innerHTML = t[i][n];
+              }
+            }
+            break;
+          case "generator":
+            header.innerHTML = "ジェネレーター";
+            for (var i = 0; i < t.length; i++) {
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              for (var n = 0; n < t[i].length; n++) {
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                if (n === 1) td.style.display = "none";
+                else td.innerHTML = t[i][n];
+              }
+            }
+            break;
+          case "wcs":
+            header.innerHTML = "WCS";
+            for (var i = 0; i < t.length; i++) {
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              for (var n = 0; n < t[i].length; n++) {
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                if (n === 1) td.style.display = "none";
+                else td.innerHTML = t[i][n];
+              }
+            }
+            break;
+          case "heatGel":
+            header.innerHTML = "ヒートジェル";
+            for (var i = 0; i < t.length; i++) {
+              var tr = document.createElement("tr");
+              table.appendChild(tr);
+              for (var n = 0; n < t[i].length; n++) {
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                if (n === 1) td.style.display = "none";
+                else td.innerHTML = t[i][n];
+              }
+            }
+            break;
+        }
+      }
+    }
+    window.onload = htmlFormat;
+  </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PANZERFRAME カスタマイズ [コバルト小隊篇]</title>
+  <link rel="stylesheet" href="../static/stylesheet/style.css">
+  <link rel="icon" href="../static/image/favicon.ico">
+</head>
+<body>
+  <div id="wrapper">
+    <header id="HEADER">
+      <div>
+        <h1 id="SITETITLE">
+          <a href="../index.html">PANZERFRAME</a>
+          カスタマイズ [コバルト小隊篇]
+        </h1>
+      </div>
+    </header>
+
+    <article id="ARTICLE">
+      <div id="CUSTOMIZE">
+        <div id="LEFT">
+          <form action="#">
+            <div id="FORM">
+              <div id="BASE" class="borderbox">
+  <dl id="INFORMATION">
+    <dt>EP</dt>
+    <dd><span>0</span>/<span>0</span></dd>
+    <!-- span[0]=使用EP, span[1]=最大EP -->
+
+    <dt>重量</dt>
+    <dd><span>0</span>/<span>0</span></dd>
+    <!-- span[2]=現在重量, span[3]=積載上限 -->
+
+    <dt>BURM</dt>
+    <dd id="BURM">-%</dd>
+    <dd id="BURMINFO">稼働率不明</dd>
+  </dl>
+</div>
+              <div class="select borderbox">
+                <dl>
+                  <dt>ヘッド</dt><dd><select id="select0"></select></dd>
+                  <dt>メイン</dt><dd><select id="select1"></select></dd>
+                  <dt>アーム</dt><dd><select id="select2"></select></dd>
+                  <dt>レッグ</dt><dd><select id="select3"></select></dd>
+                  <dt>左手兵器</dt><dd><select id="select4"></select></dd>
+                  <dt>右手兵器</dt><dd><select id="select5"></select></dd>
+                  <dt>左肩兵器</dt><dd><select id="select6"></select></dd>
+                  <dt>右肩兵器</dt><dd><select id="select7"></select></dd>
+                  <dt>ジェネレーター</dt><dd><select id="select8"></select></dd>
+                  <dt>ブースター</dt><dd><select id="select9"></select></dd>
+                  <dt>WCS</dt><dd><select id="select10"></select></dd>
+                  <dt>レーダー</dt><dd><select id="select11"></select></dd>
+                  <dt>アーマー</dt><dd><select id="select12"></select></dd>
+                  <dt>パワーユニット</dt><dd><select id="select13"></select></dd>
+                  <dt>レッグモーター</dt><dd><select id="select14"></select></dd>
+                  <dt>ヒートジェル</dt><dd><select id="select15"></select></dd>
+                </dl>
+              </div>
+              <div class="select borderbox">
+                <dl id="PURGE">
+                  <dt>排除箇所設定</dt><dd><select id="select_purge"></select></dd>
+                </dl>
+              </div>
+              <div class="select borderbox">
+                <dl>
+                  <dt>機体別組立</dt><dd><select id="select16"></select></dd>
+                </dl>
+              </div>
+              <div class="select borderbox">
+                <dl>
+                  <dt><input id="OUTPUT" type="button" value="出力"></dt>
+                  <dd><input id="VIEW" type="text" name="txtb" readonly onclick="this.focus();this.select()"></dd>
+                </dl>
+              </div>
+            </div>
+          </form>
+        </div>
+
+<div id="RIGHT">
+  <div id="number" class="borderbox">
+
+    <!-- EFFECT: dd がちょうど12個 -->
+    <div id="EFFECT">
+      <dl>
+        <dt>規格仕様</dt><dd>-</dd>
+        <dt>EP削減</dt><dd>-</dd>
+        <dt>BMS限界</dt><dd>-</dd>
+        <dt>専用兵器</dt><dd>-</dd>
+        <dt>積載量</dt><dd>-</dd>
+        <dt>特殊装備</dt><dd>-</dd>
+        <dt>無装備</dt><dd>-</dd>
+        <dt>攻属特化</dt><dd>-</dd>
+        <dt>防御特化</dt><dd>-</dd>
+        <dt>機体重量</dt><dd>-</dd>
+        <dt>武装形態</dt><dd>-</dd>
+        <dt>左右対称</dt><dd>-</dd>
+      </dl>
+    </div>
+
+    <!-- GENERAL: table が6個 -->
+    <div id="GENERAL">
+      <table title="総合値">
+        <tr><th>防御比</th><td>-</td><th>HP比</th><td>-</td></tr>
+        <tr><th>総HP</th><td>-</td><th class="framehp">外装HP</th><td class="framehp">-</td></tr>
+        <tr><th class="innerhp">内部HP</th><td class="innerhp">-</td><th>総EP</th><td>-</td></tr>
+        <tr><th>基本防御</th><td>-</td><th class="thermal">耐熱防御</th><td class="thermal">-</td></tr>
+        <tr><th class="impulse">耐衝撃防御</th><td class="impulse">-</td><th>パンチ力</th><td>-</td></tr>
+      </table>
+      <!-- table[0] の td は10個必要（上で10個） -->
+
+      <table title="レッグ">
+        <tr><th>最大積載</th><td>-</td><th>歩行速度</th><td>-</td></tr>
+        <tr><th>地上旋回</th><td>-</td><th>空中旋回</th><td>-</td></tr>
+      </table>
+      <!-- table[1]: td 4個 -->
+
+      <table title="ジェネレーター">
+        <tr><th>出力</th><td>-</td><th>最大EP</th><td>-</td></tr>
+        <tr><th>限界域</th><td>-</td><th>回復力</th><td>-</td></tr>
+      </table>
+      <!-- table[2]: td 4個 -->
+
+      <table title="ブースター">
+        <tr><th>消費出力</th><td>-</td><th>最高速度</th><td>-</td></tr>
+        <tr><th>重力補正</th><td>-</td><th>加速力</th><td>-</td></tr>
+      </table>
+      <!-- table[3]: td 4個 -->
+
+      <table title="レーダー">
+        <tr><th>索敵範囲</th><td>-</td><th>タイプ</th><td>-</td></tr>
+      </table>
+      <!-- table[4]: td 2個 -->
+
+      <table title="その他">
+        <tr><th></th><td>-</td></tr>
+      </table>
+      <!-- table[5]: 最低1つ（中身はほぼ未使用） -->
+    </div>
+
+    <!-- CORRECTION: td が28個 -->
+    <div id="CORRECTION">
+      <table>
+        <tr>
+          <th>腕稼働</th><td>-</td><th>パンチ力</th><td>-</td>
+          <th>GN回復</th><td>-</td><th>GN出力</th><td>-</td>
+        </tr>
+        <tr>
+          <th>ロック速度</th><td>-</td><th>ロック距離</th><td>-</td>
+          <th>射程幅</th><td>-</td><th>B加速</th><td>-</td>
+        </tr>
+        <tr>
+          <th>B最高速</th><td>-</td><th>B消費</th><td>-</td>
+          <th>歩行</th><td>-</td><th>グリップ</th><td>-</td>
+        </tr>
+        <tr>
+          <th>地上旋回</th><td>-</td><th>空中旋回</th><td>-</td>
+          <th>J速度</th><td>-</td><th>J反応</th><td>-</td>
+        </tr>
+        <tr>
+          <th>バランス</th><td>-</td><th>兵器攻撃</th><td>-</td>
+          <th>基本防御</th><td>-</td><th>HP</th><td>-</td>
+        </tr>
+        <tr>
+          <th>補正A</th><td>-</td><th>補正B</th><td>-</td>
+          <th>補正C</th><td>-</td><th>補正D</th><td>-</td>
+        </tr>
+        <tr>
+          <th>補正E</th><td>-</td><th>補正F</th><td>-</td>
+          <th>補正G</th><td>-</td><th>補正H</th><td>-</td>
+        </tr>
+      </table>
+      <!-- 上で td が 4*7 = 28 個 -->
+    </div>
+
+  </div>
+</div>
+      </div>
+    </article>
+
+    <footer id="FOOTER">
+      <div>
+        <nav id="MAINNAV">
+          <table class="borderbox">
+            <thead><tr><th colspan="2">ナビゲーション</th></tr></thead>
+            <tbody>
+              <tr>
+                <th>カスタマイズ</th>
+                <td>
+                  <span class="disabled">序章篇</span> -
+                  <span class="disabled">本篇</span> -
+                  <span class="disabled">BT</span> -
+                  <a href="SLPM65199.html">コバルト小隊篇</a> -
+                  <span class="disabled">2序章篇</span> -
+                  <a href="SLPM65343.html">2本篇</a>
+                </td>
+              </tr>
+              <tr>
+                <th>パーツ一覧</th>
+                <td>
+                  <span class="disabled">序章篇</span> -
+                  <span class="disabled">本篇</span> -
+                  <span class="disabled">BT</span> -
+                  <span class="disabled">コバルト小隊篇</span> -
+                  <span class="disabled">2序章篇</span> -
+                  <a href="../parts/SLPM65343.html">2本篇</a>
+                </td>
+              </tr>
+              <tr>
+                <th>サルベージ</th>
+                <td>
+                  <a href="../salvage/SLPS20075.html">序章篇</a> -
+                  <a href="../salvage/SLPM65033.html">本篇</a> -
+                  <a href="../salvage/SLPM65123.html">BT</a> -
+                  <a href="../salvage/SLPM65199.html">コバルト小隊篇</a> -
+                  <a href="../salvage/SLPM62339.html">2序章篇</a> -
+                  <a href="../salvage/SLPM65343.html">2本篇</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </nav>
+        <p><small>&copy; 2012–2026 ALNAME</small></p>
+      </div>
+    </footer>
+  </div>
+<script src="../static/customize/SLPM65199.js"></script>
+<script>
+(function () {
+  function readArrFromIds() {
+    for (var i = 0; i < 16; i++) {
+      var el = document.getElementById("select" + i);
+      arr[i] = el ? el.selectedIndex : 0;
+    }
+    // arm / shoulder が参照する selbox も同期
+    selbox = document.getElementById("FORM").getElementsByTagName("select");
+  }
+
+  function runCustomize() {
+    readArrFromIds();
+    calc();
+  }
+
+  function runFormat() {
+    var formatEl = document.getElementById("select16");
+    var sel = formatEl ? formatEl.selectedIndex : 0;
+    if (sel > -1 && typeof formatarr !== "undefined" && sel < formatarr.length) {
+      for (var i = 0; i < 16; i++) {
+        arr[i] = formatarr[sel][i];
+        var el = document.getElementById("select" + i);
+        if (el) el.selectedIndex = arr[i];
+      }
+    }
+    calc();
+  }
+
+  function onPartChange(e) {
+    var id = e.target.id; // select0 ... select15
+    var n = parseInt(id.replace("select", ""), 10);
+
+    // 両手・両肩の制約
+    if (n === 4 || n === 5) {
+      // arm() は selbox の index 4/5 を前提にしているので同期
+      selbox = document.getElementById("FORM").getElementsByTagName("select");
+      arm(n === 4);
+    }
+    if (n === 6 || n === 7) {
+      selbox = document.getElementById("FORM").getElementsByTagName("select");
+      shoulder(n === 6);
+    }
+
+    runCustomize();
+  }
+
+  window.addEventListener("load", function () {
+    // パーツ 0〜15
+    for (var i = 0; i < 16; i++) {
+      var el = document.getElementById("select" + i);
+      if (!el) {
+        console.warn("missing #select" + i);
+        continue;
+      }
+      el.addEventListener("change", onPartChange);
+    }
+
+    // 機体別組立
+    var formatEl = document.getElementById("select16");
+    if (formatEl) {
+      formatEl.addEventListener("change", runFormat);
+    }
+
+    // 初期計算
+    runCustomize();
+  });
+})();
+</script>
+</html>

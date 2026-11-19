@@ -670,7 +670,7 @@ function calc(){
 
 window.onload=function(){
 	def();
-	//ID("FORM").addEventListener("change", selectformat);
+	ID("FORM").addEventListener("change", selectformat);
 }
 
 function def(){

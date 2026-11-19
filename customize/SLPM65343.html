@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PANZERFRAME カスタマイズ [2本篇]</title>
+  <link rel="stylesheet" href="../static/stylesheet/style.css">
+  <link rel="icon" href="../static/image/favicon.ico">
+</head>
+<body>
+  <div id="wrapper">
+    <header id="HEADER">
+      <div>
+        <h1 id="SITETITLE">
+          <a href="../index.html">PANZERFRAME</a>
+          カスタマイズ [2本篇]
+        </h1>
+      </div>
+    </header>
+
+    <article id="ARTICLE">
+      <div id="CUSTOMIZE">
+        <div id="LEFT">
+          <form action="#">
+            <div id="FORM">
+              <div id="BASE" class="borderbox">
+                <dl id="INFORMATION">
+                  <dt>EP</dt><dd id="EN">0/0</dd><dd><meter id="EP" value="0" min="0" max="10000">meter</meter></dd>
+                  <dt>重量</dt><dd id="WE">0/0</dd><dd><meter id="WEIGHT" value="0" min="0" max="8000" low="3080" high="5459" optimum="0">meter</meter></dd>
+                  <dt>BURM</dt><dd id="BURM">-%</dd><dd id="BURMINFO">稼働率不明</dd>
+                </dl>
+              </div>
+              <div class="select borderbox">
+                <dl id="CUSTOMIZETYPE">
+                  <dt>カスタマイズ</dt><dd><select id="TYPE" class="type"></select></dd>
+                </dl>
+              </div>
+              <div class="select borderbox">
+                <dl id="FRAME">
+                  <dt>ヘッド</dt><dd><select class="frame"></select></dd>
+                  <dt>メイン</dt><dd><select class="frame"></select></dd>
+                  <dt>左アーム</dt><dd><select class="frame"></select></dd>
+                  <dt>右アーム <input type="checkbox" id="RIGHTARM" title="左右対称にする" value="same" class="arm"></dt><dd><select class="frame"></select></dd>
+                  <dt>レッグ</dt><dd><select class="frame"></select></dd>
+                  <dt>左手兵器</dt><dd><select class="weapon"></select></dd>
+                  <dt>右手兵器</dt><dd><select class="weapon"></select></dd>
+                  <dt>左肩兵器</dt><dd><select class="weapon"></select></dd>
+                  <dt>右肩兵器</dt><dd><select class="weapon"></select></dd>
+                  <dt>マテリアル</dt><dd><select class="inner"></select></dd>
+                  <dt>ブースター</dt><dd><select class="inner"></select></dd>
+                  <dt>インナーBOX</dt><dd><select class="inner"></select></dd>
+                  <dt>ジェネレーター</dt><dd><select class="inner"></select></dd>
+                  <dt>WCS1</dt><dd><select class="wcs"></select></dd>
+                  <dt>WCS2</dt><dd><select class="wcs"></select></dd>
+                  <dt>WCS3</dt><dd><select class="wcs"></select></dd>
+                  <dt>ヒートジェル</dt><dd><select class="gel"></select></dd>
+                </dl>
+              </div>
+              <div class="select borderbox">
+                <dl id="PURGE">
+                  <dt>排除箇所設定</dt><dd><select class="purge"></select></dd>
+                </dl>
+                <dl id="TRANSFORM">
+                  <dt>左手変形</dt><dd><select class="trans"></select></dd>
+                  <dt>右手変形</dt><dd><select class="trans"></select></dd>
+                  <dt>左肩変形</dt><dd><select class="trans"></select></dd>
+                  <dt>右肩変形</dt><dd><select class="trans"></select></dd>
+                </dl>
+              </div>
+              <div class="select borderbox">
+                <dl id="FORMAT">
+                  <dt>機体別組立</dt><dd><select class="format"></select></dd>
+                </dl>
+              </div>
+              <div class="select borderbox">
+                <dl>
+                  <dt><input id="OUTPUT" type="button" value="パスワード"></dt><dd>-</dd>
+                </dl>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div id="RIGHT">
+          <div id="number" class="borderbox">
+            <div id="EFFECT">
+              <dl>
+                <dt>規格仕様</dt><dd>-</dd>
+                <dt>専用兵器</dt><dd>-</dd>
+                <dt>積載量</dt><dd>-</dd>
+                <dt>特殊装備</dt><dd>-</dd>
+                <dt>無装備</dt><dd>-</dd>
+                <dt>攻属特化</dt><dd>-</dd>
+                <dt>防御特化</dt><dd>-</dd>
+                <dt>機体重量</dt><dd>-</dd>
+                <dt>武装形態</dt><dd>-</dd>
+                <dt>左右対称</dt><dd>-</dd>
+                <dt>EP削減</dt><dd>-</dd>
+                <dt>BMS限界</dt><dd>-</dd>
+              </dl>
+            </div>
+            <div id="GENERAL">
+              <div>
+                <dl title="総合値">
+                  <dt>HP比</dt><dd>-</dd>
+                  <dt>耐久比</dt><dd>-</dd>
+                  <dt>総HP</dt><dd>-</dd>
+                  <dt class="framehp">外装HP</dt><dd class="framehp">-</dd>
+                  <dt class="innerhp">内部HP</dt><dd class="innerhp">-</dd>
+                  <dt>総重量</dt><dd>-</dd>
+                  <dt>総EP</dt><dd>-</dd>
+                  <dt>基本防御</dt><dd>-</dd>
+                  <dt class="impulse">耐衝撃防御</dt><dd class="impulse">-</dd>
+                  <dt class="thermal">耐熱防御</dt><dd class="thermal">-</dd>
+                  <dt>左パンチ力</dt><dd>-</dd>
+                  <dt>右パンチ力</dt><dd>-</dd>
+                </dl>
+              </div>
+              <div>
+                <dl title="インナーBOX"><dt>最大EP</dt><dd>-</dd></dl>
+                <dl title="ジェネレーター">
+                  <dt>出力</dt><dd>-</dd>
+                  <dt>出力全快迄</dt><dd class="second">-</dd>
+                </dl>
+                <dl title="メインフレーム"><dt>空中旋回</dt><dd>-</dd></dl>
+                <dl title="レッグフレーム">
+                  <dt>最大積載</dt><dd>-</dd>
+                  <dt>地上旋回</dt><dd>-</dd>
+                  <dt>歩行速度</dt><dd>-</dd>
+                </dl>
+                <dl title="ブースター">
+                  <dt>重力補正</dt><dd>-</dd>
+                  <dt>最高速度</dt><dd>-</dd>
+                  <dt>加速力</dt><dd>-</dd>
+                </dl>
+              </div>
+            </div>
+            <div id="CORRECTION">
+              <div>
+                <dl title="フレーム">
+                  <dt>空中旋回</dt><dd class="point">-</dd>
+                  <dt>基本防御</dt><dd>-</dd>
+                  <dt>内部HP</dt><dd>-</dd>
+                </dl>
+                <dl title="ブースター">
+                  <dt>加速</dt><dd>-</dd>
+                  <dt>最高速</dt><dd>-</dd>
+                </dl>
+                <dl title="ジェネレーター">
+                  <dt>出力</dt><dd>-</dd>
+                  <dt>回復力</dt><dd>-</dd>
+                </dl>
+                <dl title="レッグ性能">
+                  <dt>地上旋回</dt><dd class="point">-</dd>
+                  <dt>歩行速度</dt><dd>-</dd>
+                </dl>
+                <dl title="ジャンプ">
+                  <dt>上昇速度</dt><dd>-</dd>
+                  <dt>反応速度</dt><dd>-</dd>
+                </dl>
+              </div>
+              <div>
+                <dl title="ロック性能">
+                  <dt>速度</dt><dd>-</dd>
+                  <dt>距離</dt><dd>-</dd>
+                  <dt>射程幅</dt><dd>-</dd>
+                </dl>
+                <dl title="装備兵器">
+                  <dt>手攻撃力</dt><dd>-</dd>
+                  <dt>肩攻撃力</dt><dd>-</dd>
+                  <dt>頭胸攻撃</dt><dd>-</dd>
+                  <dt>消費出力</dt><dd>-</dd>
+                </dl>
+                <dl title="アーム性能">
+                  <dt>パンチ力</dt><dd>-</dd>
+                  <dt>振る速度</dt><dd>-</dd>
+                </dl>
+                <dl title="その他"><dt>バランス</dt><dd>-</dd></dl>
+              </div>
+            </div>
+          </div>
+
+          <div id="WEAPON" class="borderbox">
+            <table title="兵器" id="tableWeapon">
+              <thead>
+                <tr>
+                  <th style="width:5em;"></th>
+                  <th>左手</th><th>右手</th><th>左肩</th><th>右肩</th>
+                  <th>頭部</th><th>胸部</th>
+                  <th>左手<br>変形</th><th>右手<br>変形</th>
+                  <th>左肩<br>変形</th><th>右肩<br>変形</th>
+                </tr>
+              </thead>
+              <tbody class="numeric" id="WEP">
+                <tr><th>攻撃力</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                <tr><th>属性</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                <tr><th>消費出力</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                <tr><th>爆発威力</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                <tr><th>弾数</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                <tr><th>弾速</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                <tr><th>追尾</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                <tr><th>爆発範囲</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+              </tbody>
+            </table>
+            <div>
+              <table title="WCS" id="tableWcs" style="width:50%;">
+                <thead>
+                  <tr><th style="width:5em;"></th><th>WCS1</th><th>WCS2</th><th>WCS3</th></tr>
+                </thead>
+                <tbody class="numeric" id="WCS">
+                  <tr><th>サイズ</th><td>-</td><td>-</td><td>-</td></tr>
+                  <tr><th>速度</th><td>-</td><td>-</td><td>-</td></tr>
+                  <tr><th>ロック</th><td>-</td><td>-</td><td>-</td></tr>
+                  <tr><th>距離</th><td>-</td><td>-</td><td>-</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <footer id="FOOTER">
+      <div>
+        <nav id="MAINNAV">
+          <table class="borderbox">
+            <thead><tr><th colspan="2">ナビゲーション</th></tr></thead>
+            <tbody>
+              <tr>
+                <th>カスタマイズ</th>
+                <td>
+                  <span class="disabled">序章篇</span> -
+                  <span class="disabled">本篇</span> -
+                  <span class="disabled">BT</span> -
+                  <a href="SLPM65199.html">コバルト小隊篇</a> -
+                  <span class="disabled">2序章篇</span> -
+                  <a href="SLPM65343.html">2本篇</a>
+                </td>
+              </tr>
+              <tr>
+                <th>パーツ一覧</th>
+                <td>
+                  <span class="disabled">序章篇</span> -
+                  <span class="disabled">本篇</span> -
+                  <span class="disabled">BT</span> -
+                  <span class="disabled">コバルト小隊篇</span> -
+                  <span class="disabled">2序章篇</span> -
+                  <a href="../parts/SLPM65343.html">2本篇</a>
+                </td>
+              </tr>
+              <tr>
+                <th>サルベージ</th>
+                <td>
+                  <a href="../salvage/SLPS20075.html">序章篇</a> -
+                  <a href="../salvage/SLPM65033.html">本篇</a> -
+                  <a href="../salvage/SLPM65123.html">BT</a> -
+                  <a href="../salvage/SLPM65199.html">コバルト小隊篇</a> -
+                  <a href="../salvage/SLPM62339.html">2序章篇</a> -
+                  <a href="../salvage/SLPM65343.html">2本篇</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </nav>
+        <p><small>&copy; 2012–2026 ALNAME</small></p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../static/customize/SLPM65343hp.js"></script>
+  <script src="../static/customize/J2Data.js"></script>
+</body>
+</html>

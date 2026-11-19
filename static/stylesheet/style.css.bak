@@ -1,0 +1,437 @@
+@charset "UTF-8";
+
+/* ===== Base ===== */
+body {
+  font-family: "メイリオ", Meiryo, "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+  background-color: #fafafa;
+  margin: 0;
+  padding: 0;
+  color: #222;
+  line-height: 1.5;
+}
+
+article, aside, footer, header, nav, section {
+  display: block;
+}
+
+select {
+  color: black !important;
+}
+select:disabled {
+  color: gray !important;
+}
+
+#wrapper {
+  min-width: 320px;
+}
+
+#SITETITLE {
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: normal;
+}
+#SITETITLE a {
+  color: #224;
+  text-decoration: none;
+  font-weight: bold;
+}
+#SITETITLE a:hover {
+  text-decoration: underline;
+}
+
+#HEADER,
+#ARTICLE,
+#FOOTER {
+  margin-bottom: 1.2em;
+}
+
+#HEADER > div,
+#ARTICLE > div,
+#FOOTER > div {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+#HEADER {
+  background: #e8ecf4;
+  border-bottom: 1px solid #c8d0e0;
+  padding: 10px 0;
+}
+
+#FOOTER {
+  text-align: center;
+  padding-bottom: 2em;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* ===== Navigation ===== */
+#MAINNAV table {
+  font-size: 0.85rem;
+  width: 100%;
+  border-collapse: collapse;
+}
+#MAINNAV thead th {
+  text-align: center;
+  background-color: #b8c4e0;
+  padding: 6px;
+}
+#MAINNAV th {
+  text-align: right;
+  color: #222;
+  width: 7.5em;
+  border: none;
+  background-color: #d0d8f0;
+  padding: 4px 0.6em;
+  white-space: nowrap;
+}
+#MAINNAV td {
+  text-align: left;
+  border: none;
+  padding: 4px 0.6em;
+}
+#MAINNAV tr:nth-child(even) td {
+  background-color: #eef1f8;
+}
+#MAINNAV a {
+  color: #1a4a9c;
+  text-decoration: none;
+}
+#MAINNAV a:hover {
+  text-decoration: underline;
+}
+#MAINNAV .disabled {
+  color: #bbb;
+  cursor: default;
+}
+
+/* ===== Customize ===== */
+#CUSTOMIZE {
+  font-size: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+#CUSTOMIZE select {
+  border: solid 1px #ccc;
+  width: 100%;
+  margin: 0;
+  padding: 2px 4px;
+}
+#CUSTOMIZE select:disabled {
+  border-color: #eee;
+}
+#CUSTOMIZE optgroup {
+  background: #f5f5f5;
+  color: #666;
+}
+#CUSTOMIZE option {
+  color: #000;
+}
+#CUSTOMIZE option:disabled {
+  color: #999;
+}
+#CUSTOMIZE table {
+  width: 100%;
+  table-layout: fixed;
+}
+#CUSTOMIZE thead {
+  background-color: #eee;
+}
+#CUSTOMIZE dt {
+  display: inline-block;
+  font-weight: bold;
+}
+#CUSTOMIZE dd {
+  display: inline-block;
+}
+
+#CUSTOMIZE #LEFT,
+#CUSTOMIZE #RIGHT {
+  box-sizing: border-box;
+}
+#CUSTOMIZE #LEFT {
+  width: 260px;
+  flex-shrink: 0;
+}
+#CUSTOMIZE #RIGHT {
+  flex: 1;
+  min-width: 280px;
+}
+
+#CUSTOMIZE #FORM > div {
+  margin-bottom: 8px;
+}
+#CUSTOMIZE #FORM dt {
+  width: 7em;
+}
+#CUSTOMIZE #INFORMATION dt {
+  width: 4em;
+}
+#CUSTOMIZE #INFORMATION dd {
+  text-align: right;
+}
+
+#CUSTOMIZE #number {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  width: 100%;
+  gap: 0;
+}
+#CUSTOMIZE #EFFECT,
+#CUSTOMIZE #GENERAL,
+#CUSTOMIZE #CORRECTION {
+  padding: 4px 6px;
+  box-sizing: border-box;
+}
+#CUSTOMIZE #EFFECT {
+  width: 20%;
+  min-width: 140px;
+}
+#CUSTOMIZE #GENERAL,
+#CUSTOMIZE #CORRECTION {
+  width: 40%;
+  min-width: 200px;
+  border-left: solid 1px #ccc;
+  display: flex;
+}
+#CUSTOMIZE #GENERAL > div,
+#CUSTOMIZE #CORRECTION > div {
+  width: 50%;
+}
+#CUSTOMIZE #GENERAL dd,
+#CUSTOMIZE #CORRECTION dd {
+  text-align: right;
+  width: 3.8em;
+}
+#CUSTOMIZE #EFFECT dt {
+  width: 5em;
+}
+#CUSTOMIZE #EFFECT dd,
+#CUSTOMIZE #GENERAL dt,
+#CUSTOMIZE #CORRECTION dt {
+  width: 5em;
+}
+
+#EP, #WEIGHT {
+  width: 100px;
+  display: inline-block;
+}
+#EN, #WE, #BURM {
+  display: inline-block;
+  width: 5.5em;
+  text-align: right;
+  padding-right: 0.4em !important;
+}
+
+meter::-webkit-meter-bar {
+  background: #ccc;
+}
+meter::-webkit-meter-optimum-value {
+  background: CornflowerBlue;
+}
+meter::-webkit-meter-suboptimum-value {
+  background: LimeGreen;
+}
+meter::-webkit-meter-even-less-good-value {
+  background: Crimson;
+}
+
+#CUSTOMIZE .error {
+  background-color: orange;
+  color: #000;
+}
+#CUSTOMIZE .coution {
+  background-color: #e55;
+  color: #000;
+}
+#CUSTOMIZE .select dd {
+  width: 150px;
+}
+
+#GENERAL dd.second:after {
+  content: "秒";
+}
+#CORRECTION dd:after {
+  content: "%";
+  display: inline-block;
+  width: 1em;
+  text-align: left;
+}
+#CORRECTION dd.point:after {
+  content: "P";
+}
+
+/* ===== Salvage ===== */
+#SALVAGE dl,
+#SALVAGE dt,
+#SALVAGE dd {
+  margin: 0;
+  padding: 0;
+}
+#SALVAGE .assembly {
+  margin-left: 20px;
+  font-size: 0.85rem;
+  padding: 8px;
+}
+#SALVAGE .table {
+  column-count: 4;
+}
+#SALVAGE .table > dl {
+  border-bottom: solid 1px #ccc;
+}
+#SALVAGE dt {
+  display: inline-block;
+  width: 8em;
+  font-weight: bold;
+}
+#SALVAGE dd {
+  min-width: 8em;
+  display: inline-block;
+}
+#SALVAGE .multi dd {
+  min-width: 3em;
+}
+#SALVAGE #INDEX {
+  font-size: 0.85rem;
+  list-style: none;
+  padding: 8px;
+  margin: 0 0 1em;
+  column-count: 6;
+  column-rule: 1px dotted #ccc;
+}
+#SALVAGE #INDEX li {
+  margin: 2px 0;
+}
+#SALVAGE .column {
+  width: 100%;
+  column-count: 4;
+  column-rule: 1px dotted #ccc;
+}
+#SALVAGE th {
+  text-align: left;
+}
+
+/* ===== Parts ===== */
+#PARTSDATA table {
+  table-layout: fixed;
+  font-size: 0.85rem;
+  border-collapse: collapse;
+  width: 100%;
+}
+#PARTSDATA th {
+  background-color: #ddd;
+  padding: 4px 8px;
+}
+#PARTSDATA td {
+  border: solid 1px #999;
+  padding: 3px 8px;
+}
+#PARTSDATA section {
+  margin-bottom: 1.5em;
+}
+#PARTSDATA h1 {
+  font-size: 1.1rem;
+  margin: 0.8em 0 0.4em;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 2px;
+}
+
+/* ===== Common classes ===== */
+.borderbox {
+  border: solid 1px #ccc;
+  padding: 6px;
+  background-color: #fff;
+  box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.string { text-align: left; }
+.numeric { text-align: right; }
+
+.box {
+  display: flex;
+}
+
+/* Status colors */
+.variable { color: #bbb; }
+.framehp { color: MediumSlateBlue; }
+.innerhp { color: Orchid; }
+.neutral { color: #000; }
+.impulse { color: ForestGreen; }
+.thermal { color: Tomato; }
+.inner { color: Crimson; }
+.destraction { color: Teal; }
+.jammer { color: RoyalBlue; }
+.guard { color: DarkViolet; }
+.support { color: #555; }
+.regenerate { color: DodgerBlue; }
+.plus { color: RoyalBlue; }
+.minus { color: DarkOrange; }
+
+div.framehp { background-color: MediumSlateBlue; }
+div.innerhp { background-color: Orchid; }
+div.hp { background-color: Goldenrod; }
+div.neutral { background-color: gray; }
+div.impulse { background-color: ForestGreen; }
+div.thermal { background-color: Tomato; }
+div.inner { background-color: Crimson; }
+div.destraction { background-color: Teal; }
+div.jammer { background-color: RoyalBlue; }
+div.guard { background-color: DarkViolet; }
+div.support { background-color: #555; }
+div.regenerate { background-color: DodgerBlue; }
+div.epusage { background-color: PaleVioletRed; }
+div.leg { background-color: CornflowerBlue; }
+div.generater { background-color: HotPink; }
+div.booster { background-color: Tan; }
+div.weight { background-color: Violet; }
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  #CUSTOMIZE {
+    flex-direction: column;
+  }
+  #CUSTOMIZE #LEFT {
+    width: 100%;
+  }
+  #CUSTOMIZE #RIGHT {
+    width: 100%;
+    padding-left: 0;
+  }
+  #CUSTOMIZE #EFFECT,
+  #CUSTOMIZE #GENERAL,
+  #CUSTOMIZE #CORRECTION {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid #ccc;
+  }
+  #SALVAGE #INDEX {
+    column-count: 3;
+  }
+  #SALVAGE .table,
+  #SALVAGE .column {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  #MAINNAV th {
+    display: block;
+    width: auto;
+    text-align: left;
+  }
+  #MAINNAV td {
+    display: block;
+  }
+  #SALVAGE #INDEX {
+    column-count: 2;
+  }
+  #SALVAGE .table,
+  #SALVAGE .column {
+    column-count: 1;
+  }
+}
