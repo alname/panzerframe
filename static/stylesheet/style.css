@@ -1,0 +1,369 @@
+@charset "UTF-8";
+body{
+	font-family:"メイリオ",Meiryo,Verdana,Geneva,sans-serif;
+	background-color:white;
+}
+article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary{
+	display:block;
+}
+select{
+	color:black !important;
+}
+select:disabled{
+	color:gray !important;
+}
+#wrapper{
+	min-width:1000px;
+}
+#SITETITLE{
+	font-size:medium;
+}
+#HEADER,
+#ARTICLE,
+#FOOTER{
+	margin-bottom:1em;
+}
+#HEADER>div,
+#ARTICLE>div,
+#FOOTER>div{
+	width:1000px;
+	margin:0 auto;
+}
+#FOOTER{
+	text-align:center;
+}
+
+#MAINNAV table{
+	font-size:small;
+	width:100%;
+}
+#MAINNAV thead th{
+	text-align:center;
+	background-color:#BBD;
+}
+#MAINNAV th{
+	text-align:right;
+	color:black;
+	width:8em;
+	border:none;
+	background-color:#CCE;
+	padding:2px 0.5em;
+}
+#MAINNAV td{
+	text-align:left;
+	border:none;
+	padding:2px 0.5em;
+}
+#MAINNAV tr:nth-child(even) td{
+	background-color: #EEF;
+}
+#MAINNAV a[href="/"]{
+	color:silver;
+}
+
+
+#SALVAGE dl,
+#SALVAGE dt,
+#SALVAGE dd,
+#CUSTOMIZE dl,
+#CUSTOMIZE dt,
+#CUSTOMIZE dd{
+	margin:0;
+	padding:0;
+}
+
+/*customize*/
+#CUSTOMIZE{
+	font-size:small;
+	display: -moz-box;display:-ms-flexbox;display:-webkit-flex;display: flex;
+}
+#CUSTOMIZE select {
+	border:solid 1px lightgray;
+	width:100%;
+	margin:0;
+}
+#CUSTOMIZE select:disabled{
+	border-color:white;
+}
+#CUSTOMIZE optgroup {
+	background:whitesmoke;
+	color:gray;
+}
+#CUSTOMIZE option{
+	color:black;
+}
+#CUSTOMIZE option:disabled{
+	color:gray;
+}
+#CUSTOMIZE table{
+	width:100%;
+	table-layout: fixed;
+}
+#CUSTOMIZE thead{
+	background-color:#EEE;
+}
+#CUSTOMIZE dt{
+	display:inline-block;
+	font-weight:bold;
+}
+#CUSTOMIZE dd{
+	display:inline-block;
+}
+
+
+#CUSTOMIZE #LEFT,
+#CUSTOMIZE #RIGHT{
+	-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
+}
+#CUSTOMIZE #LEFT{
+	width:25%;
+}
+#CUSTOMIZE #RIGHT{
+	padding-left:40px;
+	width:75%;
+}
+
+#CUSTOMIZE #FORM>div{
+	margin-bottom:8px;
+}
+#CUSTOMIZE #FORM dt{
+	width:7em;
+}
+#CUSTOMIZE #INFORMATION dt{
+	width:4em;
+}
+#CUSTOMIZE #INFORMATION dd{
+	text-align:right;
+}
+
+#CUSTOMIZE #number{
+	display: -moz-box;display:-ms-flexbox;display:-webkit-flex;display: flex;
+	margin-bottom:8px;
+	width:100%;
+}
+#CUSTOMIZE #EFFECT,
+#CUSTOMIZE #GENERAL,
+#CUSTOMIZE #CORRECTION{
+	padding-left:4px;
+	-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
+}
+#CUSTOMIZE #EFFECT{
+	width:20%;
+}
+#CUSTOMIZE #GENERAL,
+#CUSTOMIZE #CORRECTION{
+	width:40%;
+	border-left:solid 1px silver;
+	display: -moz-box;display:-ms-flexbox;display:-webkit-flex;display: flex;
+}
+#CUSTOMIZE #GENERAL>div,
+#CUSTOMIZE #CORRECTION>div{
+	width:50%;
+}
+#CUSTOMIZE #GENERAL dd,
+#CUSTOMIZE #CORRECTION dd{
+	text-align:right;
+	width:4em;
+}
+#CUSTOMIZE #EFFECT dt{
+	width:5em;
+}
+#CUSTOMIZE #EFFECT dd,
+#CUSTOMIZE #GENERAL dt,
+#CUSTOMIZE #CORRECTION dt{
+	width:5em;
+}
+#EP,#WEIGHT{
+	width:100px;
+	display:inline-block;
+}
+#EN,#WE,#BURM{
+	display:inline-block;
+	width:6em;
+	text-align:right;
+	padding-right:.5em !important;
+}
+meter::-webkit-meter-bar{
+	background:silver;
+}
+meter::-webkit-meter-optimum-value{
+	background:CornflowerBlue;
+}
+meter::-webkit-meter-suboptimum-value{
+	background:LimeGreen;
+}
+meter::-webkit-meter-even-less-good-value{
+	background:Crimson;
+}
+
+
+#CUSTOMIZE .error{
+	background-color:Orange;
+	color:black;
+}
+#CUSTOMIZE .coution{
+	background-color:Red;
+	color:black;
+}
+#CUSTOMIZE .select dd{
+	width:144px;
+}
+#GENERAL dd.second:after{
+	content:"秒";
+}
+#CORRECTION dd:after{
+	content:"%";
+	display:inline-block;
+	width:1em;
+	text-align:left;
+}
+#CORRECTION dd.point:after{
+	content:"P";
+}
+
+
+
+/*salvage*/
+#SALVAGE h2{}
+#SALVAGE h3{}
+#SALVAGE .assembly{
+	margin-left:24px;
+	font-size:small;
+	padding:8px;
+}
+#SALVAGE .explanation{}
+#SALVAGE .table{
+	column-count: 4;
+	-webkit-column-count: 4;
+	-o-column-count: 4;
+	-moz-column-count: 4;
+}
+#SALVAGE .table>dl{
+	border-bottom:solid 1px silver;
+}
+#SALVAGE .table>div:last-child{
+	border-bottom:none;
+}
+#SALVAGE tr:last-child>td,
+#SALVAGE tr:last-child>th{
+	border-color:gray;
+}
+#SALVAGE tbody:last-child>tr:last-child>td,
+#SALVAGE tbody:last-child>tr:last-child>th{
+	border-color:silver;
+}
+#SALVAGE dt{
+	display:inline-block;
+	width:8em;
+	font-weight:bold;
+}
+#SALVAGE dd{
+	min-width:8em;
+	display:inline-block;
+}
+#SALVAGE .multi dd{
+	min-width:3em;
+}
+#SALVAGE #INDEX{
+	font-size:small;
+	list-style:none;
+	column-count: 6;
+	-webkit-column-count: 6;
+	-moz-column-count: 6;
+	
+	column-rule-style: dotted;
+	column-rule-width: 1px;
+	column-rule-color: silver;
+	-webkit-column-rule-style: dotted;
+	-webkit-column-rule-width: 1px;
+	-webkit-column-rule-color: silver;
+}
+#SALVAGE #INDEX li{
+}
+#SALVAGE #INDEX li:last-child:after{
+	content:'';
+}
+#SALVAGE .column{
+	width:100%;
+	column-count: 4;
+	-webkit-column-count: 4;
+	-moz-column-count: 4;
+	
+	column-rule-style: dotted;
+	column-rule-width: 1px;
+	column-rule-color: silver;
+	-webkit-column-rule-style: dotted;
+	-webkit-column-rule-width: 1px;
+	-webkit-column-rule-color: silver;
+}
+#SALVAGE th{
+	text-align:left;
+}
+
+/**/
+
+#PARTSDATA table{
+	table-layout: fixed;
+	font-size:small;
+	border-collapse:collapse;
+}
+#PARTSDATA th{
+	background-color:lightgray;
+}
+#PARTSDATA td{
+	border:solid 1px gray;
+	padding:2px 8px;
+}
+
+/*class*/
+.borderbox {
+	border:solid 1px silver;
+	padding:2px;
+	background-color:white;
+	-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
+	box-shadow:0 0 3px 0 #DDD;
+}
+.string{
+	text-align:left;
+}
+.numeric{
+	text-align:right
+}
+.box{
+	display: -moz-box;display: -ms-flexbox;display: -webkit-flex;display: flex;
+}
+
+/*color*/
+.variable{	color:lightgray;}
+.framehp{	color:MediumSlateBlue;}
+.innerhp{	color:Orchid;}
+.neutral{	color:black;}
+.impulse{	color:ForestGreen;}
+.thermal{	color:Tomato;}
+.inner{	color:Crimson;}
+.destraction{	color:Teal;}
+.jammer{	color:RoyalBlue;}
+.guard{	color:DarkViolet;}
+.support{	color:dimgray;}
+.regenerate{	color:DodgerBlue;}
+.plus{	color:RoyalBlue;}
+.minus{	color:DarkOrange;}
+
+/*chart*/
+div.framehp{	background-color:MediumSlateBlue;}
+div.innerhp{	background-color:Orchid;}
+div.hp{	background-color:Goldenrod;}
+div.neutral{	background-color:gray;}
+div.impulse{	background-color:ForestGreen;}
+div.thermal{	background-color:Tomato;}
+div.inner{	background-color:Crimson;}
+div.destraction{	background-color:Teal;}
+div.jammer{	background-color:RoyalBlue;}
+div.guard{	background-color:DarkViolet;}
+div.support{	background-color:dimgray;}
+div.regenerate{	background-color:DodgerBlue;}
+div.epusage{	background-color:PaleVioletRed;}
+div.leg{	background-color:CornflowerBlue;}
+div.generater{	background-color:HotPink;}
+div.booster{	background-color:Tan;}
+div.weight{	background-color:Violet;}

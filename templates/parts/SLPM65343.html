@@ -1,0 +1,102 @@
+{% extends "parts/Base.html" %}
+
+{% block script %}
+<script src="/pf/static/customize/J2Data.js"></script>
+{% endblock %}
+
+{% block title %} [2本篇]{% endblock %}
+
+{% block left %}
+{% endblock %}
+
+
+
+{% block right %}
+<div id="LIST">
+	
+</div>
+<script type="text/javascript">
+
+function htmlFormat(){
+	for (x in data){
+		var t=data[x];
+		var frame=document.createElement('section');
+		document.getElementById("LIST").appendChild(frame);
+		var header=document.createElement('h1');
+		frame.appendChild(header);
+		var table=document.createElement('table');
+		frame.appendChild(table);
+		switch(x){
+			case "head":
+				header.innerHTML="ヘッドフレーム";
+				var sheet=["名前","コメント","","重量","EP","外装HP","防御力","ロックオンスピード","",""];
+				for(var i=0;i<t.length;i++){
+					var tr=document.createElement('tr');
+					table.appendChild(tr);
+					for(var n=0;n<t[i].length;n++){
+						if(sheet[n]!=""){
+							var td=document.createElement('td');
+							tr.appendChild(td);
+							if(n==1){
+								td.style.display="none";
+							}else{
+								td.innerHTML=t[i][n];
+							}
+						}
+					}
+				}
+				break;
+			case "main":
+				header.innerHTML="メインフレーム";
+				for(var i=0;i<t.length;i++){var tr=document.createElement('tr');table.appendChild(tr);for(var n=0;n<t[i].length;n++){var td=document.createElement('td');tr.appendChild(td);if(n==1){td.style.display="none";}else{td.innerHTML=t[i][n];}}}
+				break;
+			case "arm":
+				header.innerHTML="アームフレーム";
+				for(var i=0;i<t.length;i++){var tr=document.createElement('tr');table.appendChild(tr);for(var n=0;n<t[i].length;n++){var td=document.createElement('td');tr.appendChild(td);if(n==1){td.style.display="none";}else{td.innerHTML=t[i][n];}}}
+				break;
+			case "leg":
+				header.innerHTML="レッグフレーム";
+				for(var i=0;i<t.length;i++){var tr=document.createElement('tr');table.appendChild(tr);for(var n=0;n<t[i].length;n++){var td=document.createElement('td');tr.appendChild(td);if(n==1){td.style.display="none";}else{td.innerHTML=t[i][n];}}}
+				break;
+			case "hundWeapon":
+				header.innerHTML="腕兵器";
+				for(var i=0;i<t.length;i++){var tr=document.createElement('tr');table.appendChild(tr);for(var n=0;n<t[i].length;n++){var td=document.createElement('td');tr.appendChild(td);if(n==1){td.style.display="none";}else{td.innerHTML=t[i][n];}}}
+				break;
+			case "shoulderWeapon":
+				header.innerHTML="肩兵器";
+				for(var i=0;i<t.length;i++){var tr=document.createElement('tr');table.appendChild(tr);for(var n=0;n<t[i].length;n++){var td=document.createElement('td');tr.appendChild(td);if(n==1){td.style.display="none";}else{td.innerHTML=t[i][n];}}}
+				break;
+			case "material":
+				header.innerHTML="マテリアル";
+				for(var i=0;i<t.length;i++){var tr=document.createElement('tr');table.appendChild(tr);for(var n=0;n<t[i].length;n++){var td=document.createElement('td');tr.appendChild(td);if(n==1){td.style.display="none";}else{td.innerHTML=t[i][n];}}}
+				break;
+			case "booster":
+				header.innerHTML="ブースター";
+				for(var i=0;i<t.length;i++){var tr=document.createElement('tr');table.appendChild(tr);for(var n=0;n<t[i].length;n++){var td=document.createElement('td');tr.appendChild(td);if(n==1){td.style.display="none";}else{td.innerHTML=t[i][n];}}}
+				break;
+			case "innerBox":
+				header.innerHTML="インナーBOX";
+				for(var i=0;i<t.length;i++){var tr=document.createElement('tr');table.appendChild(tr);for(var n=0;n<t[i].length;n++){var td=document.createElement('td');tr.appendChild(td);if(n==1){td.style.display="none";}else{td.innerHTML=t[i][n];}}}
+				break;
+			case "generator":
+				header.innerHTML="ジェネレーター";
+				for(var i=0;i<t.length;i++){var tr=document.createElement('tr');table.appendChild(tr);for(var n=0;n<t[i].length;n++){var td=document.createElement('td');tr.appendChild(td);if(n==1){td.style.display="none";}else{td.innerHTML=t[i][n];}}}
+				break;
+			case "wcs":
+				header.innerHTML="WCS";
+				for(var i=0;i<t.length;i++){var tr=document.createElement('tr');table.appendChild(tr);for(var n=0;n<t[i].length;n++){var td=document.createElement('td');tr.appendChild(td);if(n==1){td.style.display="none";}else{td.innerHTML=t[i][n];}}}
+				break;
+			case "heatGel":
+				header.innerHTML="ヒートジェル";
+				for(var i=0;i<t.length;i++){var tr=document.createElement('tr');table.appendChild(tr);for(var n=0;n<t[i].length;n++){var td=document.createElement('td');tr.appendChild(td);if(n==1){td.style.display="none";}else{td.innerHTML=t[i][n];}}}
+				break;
+		}
+	}
+}
+
+window.onload=function(){
+	htmlFormat();
+}
+</script>
+
+{% endblock %}

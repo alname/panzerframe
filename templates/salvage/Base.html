@@ -1,0 +1,17 @@
+{% extends "Main.html" %}
+
+{% block category %}サルベージ{% endblock %}
+{% block title %} [{{ head }}]{% endblock %}
+{% block id %}SALVAGE{% endblock %}
+
+
+{% block article %}
+<p>INDEX
+<ul id="INDEX" class="borderbox"></ul>
+<div id="UNITLIST"></div>
+{% endblock %}
+
+{% block script %}
+<script src="/pf/static/salvage/{{ disk }}.js"></script>
+<script src="/pf/static/salvage/script.js"></script>
+{% endblock %}

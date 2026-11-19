@@ -1,0 +1,207 @@
+{% extends "customize/Base.html" %}
+
+{% block script %}<script src="/pf/static/customize/SLPM65199.js"></script>{% endblock %}
+
+{% block title %} [コバルト小隊篇]{% endblock %}
+
+{#
+N,name,comment,W,EP,外装HP,防御力,耐衝撃,耐熱,ロック時間補正,W,H,兵器,細身,対称
+N,name,comment,W,EP,外装HP,防御力,耐衝撃,耐熱,内部HP補正,兵器,細身
+N,name,comment,W,EP,外装HP,防御力,耐衝撃,耐熱,攻撃力,パンチ属性,腕加速度,細身
+N,name,comment,W,EP,外装HP,防御力,耐衝撃,耐熱,積載量,歩行速度,ジャンプ,地上旋回,空中旋回,グリップ,細身
+N,name,comment,W,耐久度,カスタム,攻撃力,攻撃属性,弾速,連射性,弾数,弾寿命,爆風範囲,爆風攻撃力,追尾開始,追尾終了,精度,最大同時発射数,消費出力,ロック,種類
+N,name,comment,W,耐久度,カスタム,攻撃力,攻撃属性,弾速,連射性,弾数,弾寿命,爆風範囲,爆風攻撃力,追尾開始,追尾終了,精度,最大同時発射数,消費出力,ロック,種類
+N,name,comment,W,出力,最大EP,回復値,内部HP,耐衝撃,耐熱,Rゾーン,安全装置
+N,name,comment,W,消費出力,最高速,加速力,内部HP,耐衝撃,耐熱,重力補正
+N,name,comment,W,EP,腕W,腕H,腕T,腕L,腕LPF,腕LM,腕D1,腕D2,肩W,肩H,肩T,肩L,肩LPF,肩LM,肩D1,肩D2,内部W,内部H,内部T,内部L,内部LPF,内部LM,内部D1,内部D2
+N,name,comment,W,EP,索敵範囲,タイプ,内部HP,耐衝撃,耐熱
+N,name,comment,W,EP,内部HP,耐衝撃,ガード時補正
+N,name,comment,W,EP,腹部移動,内部HP,耐衝撃,耐熱,素手,兵器,CB
+N,name,comment,W,EP,内部HP,耐衝撃,耐熱,加速補正,歩行補正,ジャンプ補正,積載量補正
+N,name,comment,W,EP,効果
+N,name,comment,W,耐久度,カスタム,攻撃力,攻撃属性,弾速,連射性,弾数,弾寿命,爆風範囲,爆風攻撃力,追尾開始,追尾終了,精度,最大同時発射数,消費出力,ロック,種類
+#}
+
+{% block left %}
+<form action="#">
+	<div id="FORM">
+		<div id="BASE" class="borderbox">
+			<dl id="INFORMATION">
+				<dt>EP</dt><dd id="EN">0/0</dd><dd><meter id="EP" value="0" min="0" max="10000">meter</meter></dd>
+				<dt>重量</dt><dd id="WE">0/0</dd><dd><meter id="WEIGHT" value="0" min="0" max="8000" low="3080" high="5459" optimum="0">meter</meter></dd>
+				<dt>BURM</dt><dd id="BURM">-%</dd><dd id="BURMINFO">稼働率不明</dd>
+			</dl>
+		</div>
+		<div class="select borderbox">
+			<dl>
+				<dt>ヘッド</dt><dd><select id="select0"></select></dd>
+				<dt>メイン</dt><dd><select id="select1"></select></dd>
+				<dt>アーム</dt><dd><select id="select2"></select></dd>
+				<dt>レッグ</dt><dd><select id="select3"></select></dd>
+				<dt>左手兵器</dt><dd><select id="select4"></select></dd>
+				<dt>右手兵器</dt><dd><select id="select5"></select></dd>
+				<dt>左肩兵器</dt><dd><select id="select6"></select></dd>
+				<dt>右肩兵器</dt><dd><select id="select7"></select></dd>
+				<dt>ジェネレーター</dt><dd><select id="select8"></select></dd>
+				<dt>ブースター</dt><dd><select id="select9"></select></dd>
+				<dt>WCS</dt><dd><select id="select10"></select></dd>
+				<dt>レーダー</dt><dd><select id="select11"></select></dd>
+				<dt>アーマー</dt><dd><select id="select12"></select></dd>
+				<dt>パワーユニット</dt><dd><select id="select13"></select></dd>
+				<dt>レッグモーター</dt><dd><select id="select14"></select></dd>
+				<dt>ヒートジェル</dt><dd><select id="select15"></select></dd>
+			</dl>
+		</div>
+		<div class="select borderbox">
+			<dl id="PURGE">
+				<dt>排除箇所設定</dt><dd><select></select></dd>
+			</dl>
+		</div>
+		<div class="select borderbox">
+			<dl>
+				<dt>機体別組立</dt><dd><select id="select16"></select></dd>
+			</dl>
+		</div>
+		<div class="select borderbox">
+			<dl>
+				<dt><input id="OUTPUT" type="button" value="出力"></dt>
+				<dd><input id="VIEW" type="text" name="txtb" readonly="" onclick="this.focus();this.select()"></dd>
+			</dl>
+		</div>
+	</div>
+</form>
+{% endblock %}
+
+
+
+{% block right %}
+<div id="number" class="borderbox">
+	<div id="EFFECT">
+		<dl>
+			<dt>規格仕様</dt><dd>-</dd><dt>EP削減</dt><dd>-</dd><dt>BMS限界</dt><dd>-</dd><dt>専用兵器</dt><dd>-</dd><dt>積載量</dt><dd>-</dd><dt>特殊装備</dt><dd>-</dd><dt>無装備</dt><dd>-</dd><dt>攻属特化</dt><dd>-</dd><dt>防御特化</dt><dd>-</dd><dt>機体重量</dt><dd>-</dd><dt>武装形態</dt><dd>-</dd><dt>左右対称</dt><dd>-</dd>
+		</dl>
+	</div>
+	<div id="GENERAL">
+		<div>
+			<dl title="総合値">
+				<dt>耐久比</dt><dd>-</dd><dt>HP比</dt><dd>-</dd><dt>総HP</dt><dd>-</dd><dt class="framehp">外部HP</dt><dd class="framehp">-</dd><dt class="innerhp">内部HP</dt><dd class="innerhp">-</dd><dt>総EP</dt><dd>-</dd><dt>基本防御</dt><dd>-</dd><dt class="dtermal">耐熱防御</dt><dd class="dtermal">-</dd><dt class="impulse">耐衝撃防御</dt><dd class="impulse">-</dd><dt>腕攻撃力</dt><dd>-</dd><dt>パンチ属性</dt><dd>-</dd>
+			</dl>
+			<dl title="レッグ">
+				<dt>最大積載</dt><dd>-</dd><dt>歩行速度</dt><dd>-</dd>
+			</dl>
+		</div>
+		<div>
+			<dl title="レッグ">
+				<dt>地上旋回</dt><dd>-</dd><dt>空中旋回</dt><dd>-</dd><dt>グリップ</dt><dd>-</dd>
+			</dl>
+			<dl title="ジェネレーター">
+				<dt>出力</dt><dd>-</dd><dt>最大EP</dt><dd>-</dd><dt>限界域</dt><dd>-</dd><dt>回復力</dt><dd>-</dd><dt>安全装置</dt><dd>-</dd>
+			</dl>
+			<dl title="ブースター">
+				<dt>消費出力</dt><dd>-</dd><dt>最高速度</dt><dd>-</dd><dt>重力補正</dt><dd>-</dd><dt>加速力</dt><dd>-</dd>
+			</dl>
+			<dl title="レーダー">
+				<dt>索敵範囲</dt><dd>-</dd>
+			</dl>
+		</div>
+	</div>
+	<div id="CORRECTION">
+		<div>
+			<dl title="メイン1">
+				<dt>腕稼働速度</dt><dd>-</dd><dt>パンチ力</dt><dd>-</dd><dt>GN回復力</dt><dd>-</dd><dt>GN出力</dt><dd>-</dd><dt>ロック速度</dt><dd>-</dd><dt>ロック距離</dt><dd>-</dd><dt>射程距離幅</dt><dd>-</dd><dt>B加速</dt><dd>-</dd><dt>B最高速</dt><dd>-</dd><dt>B消費出力</dt><dd>-</dd>
+			</dl>
+		</div>
+		<div>
+			<dl title="メイン2">
+				<dt>歩行速度</dt><dd>-</dd><dt>グリップ</dt><dd>-</dd><dt>地上旋回</dt><dd>-</dd><dt>空中旋回</dt><dd>-</dd><dt>ジャンプ速</dt><dd>-</dd><dt>J反応速度</dt><dd>-</dd><dt>バランス補</dt><dd>-</dd><dt>兵器攻撃力</dt><dd>-</dd><dt>基本防御</dt><dd>-</dd><dt>HP</dt><dd>-</dd>
+			</dl>
+		</div>
+		<!--<dl title="サブ" style="display:none">
+			<dt>積載量<dd>-<dt>重量<dd>-<dt>誘導性<dd>-<dt>Rゾーン<dd>-<dt>ダッシュ距離<dd>-<dt>シールド速度<dd>-<dt>照準W<dd>-<dt>照準H<dd>-
+		</dl>-->
+	</div>
+</div>
+
+
+<div id="WEAPON" class=" borderbox">
+	<table title="兵器">
+		<thead>
+			<tr><th style="width:7em;"></th><th>左手</th><th>右手</th><th>左肩</th><th>右肩</th><th>頭部</th><th>胸部</th></tr>
+		</thead>
+		<tbody class="numeric">
+			<tr><th>攻撃力</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>攻撃属性</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+		</tbody>
+		<!--<tbody class="numeric>
+			<tr><th>弾速</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>速度</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>弾数</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>弾寿命</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>爆風範囲</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>爆風攻撃力</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>追尾</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>追尾開始</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>追尾終了</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>精度</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+		</tbody>-->
+		<tbody class="numeric">
+			<tr><th>最大同時発射数</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>消費出力</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+		</tbody>
+	</table>
+	<table title="WCS">
+		<thead>
+			<tr><th style="width:3em;"></th><th>PF</th><th>ミサイル</th><th>捕捉時間</th><th>最大同時<br>ロック数</th><th>射程距離</th><th>サイズW</th><th>サイズH</th></tr>
+		</thead>
+		<tbody class="numeric">
+			<tr><th>腕部</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>肩部</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+			<tr><th>頭胸</th><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+		</tbody>
+	</table>
+</div>
+
+{#
+<!--<div id="HYPERMODE">
+	<div class="column borderbox">
+		<div title="ハイパーモード">
+			<div>
+				<dt>発動回数<dd>-<dt>発動硬直<dd>-<dt>発動時間<dd>-<dt>終了硬直<dd>-</tr>
+				<dt>移動速度<dd>-<dt>攻撃力<dd>-<dt>防御力<dd>-<dt>腕稼働速度<dd>-</tr>
+			</div>
+		</div>
+		<div title="特殊HMシステム">
+			<div>
+				<dt>発動回数<dd>-<dt>転送誤差<dd>-<dt>ターゲット捕捉距離<dd>-<dt>転送所要時間<dd>-<dt>タイプ<dd>-</tr>
+			</div>
+		</div>
+	</div>
+</div>-->
+
+<!--<div id="CHART">
+	<div class="borderbox" title="グラフ">
+		<table>
+			<tbody>
+				<tr><th>左手攻撃<td><div> </div><th>地上旋回<td><div> </div></tr>
+				<tr><th>爆風攻撃<td><div> </div><th>歩行速度<td><div> </div></tr>
+				<tr><th>右手攻撃<td><div> </div><th>グリップ<td><div> </div></tr>
+				<tr><th>爆風攻撃<td><div> </div><th>Ｊ反応速<td><div> </div></tr>
+				<tr><th>左肩攻撃<td><div> </div><th>Ｊ速度<td><div> </div></tr>
+				<tr><th>爆風攻撃<td><div> </div><th>Ｊ距離<td><div> </div></tr>
+				<tr><th>右肩攻撃<td><div> </div><th>Ｇ出力<td><div> </div></tr>
+				<tr><th>爆風攻撃<td><div> </div><th>Ｇ回復<td><div> </div></tr>
+				<tr><th>頭部攻撃<td><div> </div><th>Ｂ加速<td><div> </div></tr>
+				<tr><th>爆風攻撃<td><div> </div><th>Ｂ最高速<td><div> </div></tr>
+				<tr><th>胸部攻撃<td><div> </div><th>滞空時間<td><div> </div></tr>
+				<tr><th>爆風攻撃<td><div> </div><th>空中旋回<td><div> </div></tr>
+				<tr><th>パンチ力<td><div> </div><th>基本防御<td><div> </div></tr>
+				<tr><th>総ＨＰ<td><div> </div><th>衝撃防御<td><div> </div></tr>
+				<tr><th class="framehp">外装ＨＰ<td><div> </div><th>熱防御<td><div> </div></tr>
+				<tr><th class="innerhp">内部ＨＰ<td><div> </div><th>ＷＴ残り<td><div> </div></tr>
+				<tr><th>ＥＰ使用<td><div> </div><th>機体重量<td><div> </div></tr>
+			</tbody>
+		</table>
+	</div>
+</div>-->
+#}
+{% endblock %}
