@@ -305,15 +305,10 @@ a:hover {
 
 #CUSTOMIZE #number {
   display: grid;
-  grid-template-columns: 1fr 1.4fr 1.4fr;
+  grid-template-columns: 1fr 2fr 2fr;
   gap: 0;
   margin-bottom: 14px;
   width: 100%;
-  overflow: hidden;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  box-shadow: var(--shadow);
 }
 
 #CUSTOMIZE #EFFECT,
@@ -748,7 +743,6 @@ div.weight { background-color: #a78bfa; }
     position: static;
   }
   #CUSTOMIZE #number {
-    grid-template-columns: 1fr;
   }
   #CUSTOMIZE #EFFECT,
   #CUSTOMIZE #GENERAL,
