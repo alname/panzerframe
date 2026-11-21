@@ -49,6 +49,11 @@
   // ---------------------------------------------------------------------------
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  const $cell = (sel, root = document) => root.querySelector('[data-cell="'+sel+'"]');
+
+  function el(id) {
+    return document.getElementById(id);
+  }
 
   function setText(el, value) {
     if (!el) return;
@@ -347,7 +352,7 @@
     }
 
     const burmarr = new Array(12).fill(0);
-    const Bbox = $$("#EFFECT dd");
+    const Bbox = $$("#EFFECT [data-cell]");
 
     function setBurm(bn, index) {
       burmarr[bn] = index;
@@ -415,71 +420,70 @@
     const boostAccel = ((parr[9][4] || 0) * (corr[7] || 1) + (arr[15] === 7 ? 10 : 0)).toFixed(1);
 
     // --- Render INFORMATION ---
-    const spans = $$("#INFORMATION span");
+    const spans = $$("#INFORMATION [data-cell]");
     if (spans.length >= 4) {
-      setText(spans[0], energyTotal(true));
-      setText(spans[1], energyCapacity());
-      setText(spans[2], weightTotal(true));
-      setText(spans[3], weightCapacity());
+      setText($cell('EP'), energyTotal(true));
+      setText($cell('最大EP'), energyCapacity());
+      setText($cell('重量'), weightTotal(true));
+      setText($cell('最大重量'), weightCapacity());
+    }
+    // ---- INFORMATION / meters ----
+      $cell('EP').style.color = et > ec ? "red" : "";
+      $cell('最大EP').style.color = et > ec ? "red" : "";
+      $cell('重量').style.color = wt > wc ? "red" : "";
+      $cell('最大重量').style.color = wt > wc ? "red" : "";
+      
+    const ep = el("EP");
+    const weightEl = el("WEIGHT");
+    if (ep) {
+      ep.value = et;
+      ep.max = ec || 1;
+      ep.style.outline = et > ec ? "solid 1px red" : "none";
+    }
+    if (weightEl) {
+      weightEl.value = wt;
+      weightEl.max = wc || 1;
+      weightEl.style.outline = wt > wc ? "solid 1px red" : "none";
     }
 
-    const burmEl = $("#BURM");
+    const burmEl = $("#BURM ");
     if (burmEl) setText(burmEl, `${state.burmRate}%`);
 
     // --- Render GENERAL tables ---
     const tables = $$("#GENERAL table");
-    if (tables[0]) {
-      const td = tables[0].querySelectorAll("td");
-      if (td.length >= 10) {
-        setHtmlTrusted(td[0], `<span class="impulse">${defRatioImp}</span>:<span class="thermal">${defRatioTh}</span>`);
-        setHtmlTrusted(td[1], `<span class="framehp">${hpRatioFrame}</span>:<span class="innerhp">${hpRatioInner}</span>`);
-        setText(td[2], hpTotal);
-        setText(td[3], hpFrame);
-        setText(td[4], hpInner);
-        setText(td[5], energyTotal(true));
-        setText(td[6], defBase);
-        setText(td[7], Math.trunc(defBase * (defRatioTh / 100)));
-        setText(td[8], Math.trunc(defBase * (defRatioImp / 100)));
-        setText(td[9], punch);
-      }
-    }
-    if (tables[1]) {
-      const td = tables[1].querySelectorAll("td");
-      if (td.length >= 4) {
-        setText(td[0], weightCapacity());
-        setText(td[1], lastWalk);
-        setText(td[2], lastTurnG);
-        setText(td[3], lastTurnA);
-      }
-    }
-    if (tables[2]) {
-      const td = tables[2].querySelectorAll("td");
-      if (td.length >= 4) {
-        setText(td[0], genGain);
-        setText(td[1], energyCapacity());
-        setText(td[2], genRed);
-        setText(td[3], genRec);
-      }
-    }
-    if (tables[3]) {
-      const td = tables[3].querySelectorAll("td");
-      if (td.length >= 4) {
-        setText(td[0], boostWaste);
-        setText(td[1], boostSpeed);
-        setText(td[2], boostGrav);
-        setText(td[3], boostAccel);
-      }
-    }
-    if (tables[4]) {
-      const td = tables[4].querySelectorAll("td");
-      if (td.length >= 2) {
-        setText(td[0], parr[11][3]);
-        setText(td[1], RADAR_TYPES[parr[11][4]] || "-");
-      }
-    }
+    
+        setHtmlTrusted($cell('防御比'), `<span class="impulse">${defRatioImp}</span>:<span class="thermal">${defRatioTh}</span>`);
+        setHtmlTrusted($cell('HP比'), `<span class="framehp">${hpRatioFrame}</span>:<span class="innerhp">${hpRatioInner}</span>`);
+        setText($cell('総HP'), hpTotal);
+        setText($cell('外装HP'), hpFrame);
+        setText($cell('内部HP'), hpInner);
+        setText($cell('総EP'), energyTotal(true));
+        setText($cell('基本防御'), defBase);
+        setText($cell('耐熱防御'), Math.trunc(defBase * (defRatioTh / 100)));
+        setText($cell('耐衝撃防御'), Math.trunc(defBase * (defRatioImp / 100)));
+        setText($cell('パンチ力'), punch);
+        
+        setText($cell('最大積載'), weightCapacity());
+        setText($cell('歩行速度'), lastWalk);
+        setText($cell('地上旋回'), lastTurnG);
+        setText($cell('空中旋回'), lastTurnA);
+        
+        setText($cell('出力'), genGain);
+        setText($cell('最大EP'), energyCapacity());
+        setText($cell('限界域'), genRed);
+        setText($cell('回復力'), genRec);
+        
+        setText($cell('消費出力'), boostWaste);
+        setText($cell('最高速度'), boostSpeed);
+        setText($cell('重力補正'), boostGrav);
+        setText($cell('加速力'), boostAccel);
+        
+        setText($cell('索敵範囲'), parr[11][3]);
+        setText($cell('タイプ'), RADAR_TYPES[parr[11][4]] || "-");
 
+        
     // --- Render CORRECTION ---
-    const corrTd = $$("#CORRECTION td");
+    const corrTd = $$("#CORRECTION [data-cell]");
     for (let i = 0; i < Math.min(28, corrTd.length); i++) {
       let s = 0;
       if (i === 4 || i === 9) s = corr[i] > 1 ? -1 : corr[i] < 1 ? 1 : 0;

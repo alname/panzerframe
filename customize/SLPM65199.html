@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,6 +21,7 @@
     }
   </style>
 </head>
+
 <body>
   <div id="wrapper">
     <header id="HEADER">
@@ -126,126 +128,328 @@
         <!-- RIGHT -->
         <div id="RIGHT">
           <div id="number">
-<div>
-            <section id="BASE" class="borderbox" aria-label="機体リソース">
-              <div id="INFORMATION">
-                <dl class="infotable">
-                  <dt>EP</dt>
-                  <dd><span>0</span>/<span>0</span></dd>
-                  <dd><meter id="EP" value="0" min="0" max="10000"></meter></dd>
-                </dl>
-                <dl class="infotable">
-                  <dt>重量</dt>
-                  <dd><span>0</span>/<span>0</span></dd>
-                  <dd>
-                    <meter id="WEIGHT" value="0" min="0" max="8000"
-                           low="3080" high="5459" optimum="0"></meter>
-                  </dd>
-                </dl>
-                <dl class="infotable">
-                  <dt>BURM</dt>
-                  <dd id="BURM">0%</dd>
-                  <dd id="BURMINFO">稼働率</dd>
-                </dl>
-              </div>
-            </section>
+            <div>
+              <section id="BASE" class="borderbox" aria-label="機体リソース">
+                <div id="INFORMATION">
+                  <dl class="infotable">
+                    <dt>EP</dt>
+                    <dd>
+                      <span data-cell="EP">0</span>
+                      <span>/</span>
+                      <span data-cell="最大EP">0</span>
+                      <meter id="EP" value="0" min="0" max="10000"></meter>
+                    </dd>
+                  </dl>
+                  <dl class="infotable">
+                    <dt>重量</dt>
+                    <dd>
+                      <span data-cell="重量">0</span>
+                      <span>/</span>
+                      <span data-cell="最大重量">0</span>
+                      <meter id="WEIGHT" value="0" min="0" max="8000" low="3080" high="5459" optimum="0"></meter>
+                    </dd>
+                  </dl>
+                  <dl class="infotable">
+                    <dt>BURM</dt>
+                    <dd>
+                      <span id="BURM" data-cell="BURM稼働率">0%</span>
+                      <span id="BURMINFO" data-cell="BURM稼働状態">稼働率</spanspan>
+                    </dd>
+                  </dl>
+                </div>
+              </section>
 
-            <section id="EFFECT" class="borderbox" aria-label="BURM効果">
-              <h2 class="visually-hidden">BURM効果</h2>
-              <div>
-                <dl><dt>規格仕様</dt><dd>-</dd></dl>
-                <dl><dt>EP削減</dt><dd>-</dd></dl>
-                <dl><dt>BMS限界</dt><dd>-</dd></dl>
-                <dl><dt>専用兵器</dt><dd>-</dd></dl>
-                <dl><dt>積載量</dt><dd>-</dd></dl>
-                <dl><dt>特殊装備</dt><dd>-</dd></dl>
-                <dl><dt>無装備</dt><dd>-</dd></dl>
-                <dl><dt>攻属特化</dt><dd>-</dd></dl>
-                <dl><dt>防御特化</dt><dd>-</dd></dl>
-                <dl><dt>機体重量</dt><dd>-</dd></dl>
-                <dl><dt>武装形態</dt><dd>-</dd></dl>
-                <dl><dt>左右対称</dt><dd>-</dd></dl>
-              </div>
-            </section>
-</div>
-            <section id="GENERAL" class="borderbox" aria-label="総合性能" style="column-count: 1;">
+              <section id="EFFECT" class="borderbox" aria-label="BURM効果">
+                <h2 class="visually-hidden">BURM効果</h2>
+                <div>
+                  <dl>
+                    <dt>規格仕様</dt>
+                    <dd data-cell="規格仕様">-</dd>
+                  </dl>
+                  <dl>
+                    <dt>EP削減</dt>
+                    <dd data-cell="EP削減">-</dd>
+                  </dl>
+                  <dl>
+                    <dt>BMS限界</dt>
+                    <dd data-cell="BMS限界">-</dd>
+                  </dl>
+                  <dl>
+                    <dt>専用兵器</dt>
+                    <dd data-cell="専用兵器">-</dd>
+                  </dl>
+                  <dl>
+                    <dt>積載量</dt>
+                    <dd data-cell="積載量">-</dd>
+                  </dl>
+                  <dl>
+                    <dt>特殊装備</dt>
+                    <dd data-cell="特殊装備">-</dd>
+                  </dl>
+                  <dl>
+                    <dt>無装備</dt>
+                    <dd data-cell="無装備">-</dd>
+                  </dl>
+                  <dl>
+                    <dt>攻属特化</dt>
+                    <dd data-cell="攻属特化">-</dd>
+                  </dl>
+                  <dl>
+                    <dt>防御特化</dt>
+                    <dd data-cell="防御特化">-</dd>
+                  </dl>
+                  <dl>
+                    <dt>機体重量</dt>
+                    <dd data-cell="機体重量">-</dd>
+                  </dl>
+                  <dl>
+                    <dt>武装形態</dt>
+                    <dd data-cell="武装形態">-</dd>
+                  </dl>
+                  <dl>
+                    <dt>左右対称</dt>
+                    <dd data-cell="左右対称">-</dd>
+                  </dl>
+                </div>
+              </section>
+            </div>
+            <section id="GENERAL" class="borderbox" aria-label="総合性能">
               <h2 class="visually-hidden">総合性能</h2>
 
               <div title="総合値">
-                <dl><dt>防御比</dt><dd>-</dd></dl>
-                <dl><dt>HP比</dt><dd>-</dd></dl>
-                <dl><dt>総HP</dt><dd>-</dd></dl>
-                <dl><dt class="framehp">外装HP</dt><dd class="framehp">-</dd></dl>
-                <dl><dt class="innerhp">内部HP</dt><dd class="innerhp">-</dd></dl>
-                <dl><dt>総EP</dt><dd>-</dd></dl>
-                <dl><dt>基本防御</dt><dd>-</dd></dl>
-                <dl><dt class="thermal">耐熱防御</dt><dd class="thermal">-</dd></dl>
-                <dl><dt class="impulse">耐衝撃防御</dt><dd class="impulse">-</dd></dl>
-                <dl><dt>パンチ力</dt><dd>-</dd></dl>
+                <dl>
+                  <dt>防御比</dt>
+                  <dd data-cell="防御比">-</dd>
+                </dl>
+                <dl>
+                  <dt>HP比</dt>
+                  <dd data-cell="HP比">-</dd>
+                </dl>
+                <dl>
+                  <dt>総HP</dt>
+                  <dd data-cell="総HP">-</dd>
+                </dl>
+                <dl>
+                  <dt class="framehp">外装HP</dt>
+                  <dd class="framehp" data-cell="外装HP">-</dd>
+                </dl>
+                <dl>
+                  <dt class="innerhp">内部HP</dt>
+                  <dd class="innerhp" data-cell="内部HP">-</dd>
+                </dl>
+                <dl>
+                  <dt>総EP</dt>
+                  <dd data-cell="総EP">-</dd>
+                </dl>
+                <dl>
+                  <dt>基本防御</dt>
+                  <dd data-cell="基本防御">-</dd>
+                </dl>
+                <dl>
+                  <dt class="thermal">耐熱防御</dt>
+                  <dd class="thermal" data-cell="耐熱防御">-</dd>
+                </dl>
+                <dl>
+                  <dt class="impulse">耐衝撃防御</dt>
+                  <dd class="impulse" data-cell="耐衝撃防御">-</dd>
+                </dl>
+                <dl>
+                  <dt>パンチ力</dt>
+                  <dd data-cell="パンチ力">-</dd>
+                </dl>
               </div>
 
               <div title="レッグ">
-                <dl><dt>最大積載</dt><dd>-</dd></dl>
-                <dl><dt>歩行速度</dt><dd>-</dd></dl>
-                <dl><dt>地上旋回</dt><dd>-</dd></dl>
-                <dl><dt>空中旋回</dt><dd>-</dd></dl>
+                <dl>
+                  <dt>最大積載</dt>
+                  <dd data-cell="最大積載">-</dd>
+                </dl>
+                <dl>
+                  <dt>歩行速度</dt>
+                  <dd data-cell="歩行速度">-</dd>
+                </dl>
+                <dl>
+                  <dt>地上旋回</dt>
+                  <dd data-cell="地上旋回">-</dd>
+                </dl>
+                <dl>
+                  <dt>空中旋回</dt>
+                  <dd data-cell="空中旋回">-</dd>
+                </dl>
               </div>
 
               <div title="ジェネレーター">
-                <dl><dt>出力</dt><dd>-</dd></dl>
-                <dl><dt>最大EP</dt><dd>-</dd></dl>
-                <dl><dt>限界域</dt><dd>-</dd></dl>
-                <dl><dt>回復力</dt><dd>-</dd></dl>
+                <dl>
+                  <dt>出力</dt>
+                  <dd data-cell="出力">-</dd>
+                </dl>
+                <dl>
+                  <dt>最大EP</dt>
+                  <dd data-cell="最大EP">-</dd>
+                </dl>
+                <dl>
+                  <dt>限界域</dt>
+                  <dd data-cell="限界域">-</dd>
+                </dl>
+                <dl>
+                  <dt>回復力</dt>
+                  <dd data-cell="回復力">-</dd>
+                </dl>
               </div>
 
               <div title="ブースター">
-                <dl><dt>消費出力</dt><dd>-</dd></dl>
-                <dl><dt>最高速度</dt><dd>-</dd></dl>
-                <dl><dt>重力補正</dt><dd>-</dd></dl>
-                <dl><dt>加速力</dt><dd>-</dd></dl>
+                <dl>
+                  <dt>消費出力</dt>
+                  <dd data-cell="消費出力">-</dd>
+                </dl>
+                <dl>
+                  <dt>最高速度</dt>
+                  <dd data-cell="最高速度">-</dd>
+                </dl>
+                <dl>
+                  <dt>重力補正</dt>
+                  <dd data-cell="重力補正">-</dd>
+                </dl>
+                <dl>
+                  <dt>加速力</dt>
+                  <dd data-cell="加速力">-</dd>
+                </dl>
               </div>
 
               <div title="レーダー">
-                <dl><dt>索敵範囲</dt><dd>-</dd></dl>
-                <dl><dt>タイプ</dt><dd>-</dd></dl>
+                <dl>
+                  <dt>索敵範囲</dt>
+                  <dd data-cell="索敵範囲">-</dd>
+                </dl>
+                <dl>
+                  <dt>タイプ</dt>
+                  <dd data-cell="タイプ">-</dd>
+                </dl>
               </div>
 
               <div title="その他">
-                <dl><dt></dt><dd>-</dd></dl>
+                <dl>
+                  <dt></dt>
+                  <dd data-cell="その他">-</dd>
+                </dl>
               </div>
             </section>
 
             <section id="CORRECTION" class="borderbox" aria-label="補正値">
               <h2 class="visually-hidden">補正値</h2>
               <div style="column-count: 2;">
-                <dl><dt>腕稼働</dt><dd>-</dd></dl>
-                <dl><dt>パンチ力</dt><dd>-</dd></dl>
-                <dl><dt>GN回復</dt><dd>-</dd></dl>
-                <dl><dt>GN出力</dt><dd>-</dd></dl>
-                <dl><dt>ロック速度</dt><dd>-</dd></dl>
-                <dl><dt>ロック距離</dt><dd>-</dd></dl>
-                <dl><dt>射程幅</dt><dd>-</dd></dl>
-                <dl><dt>B加速</dt><dd>-</dd></dl>
-                <dl><dt>B最高速</dt><dd>-</dd></dl>
-                <dl><dt>B消費</dt><dd>-</dd></dl>
-                <dl><dt>歩行</dt><dd>-</dd></dl>
-                <dl><dt>グリップ</dt><dd>-</dd></dl>
-                <dl><dt>地上旋回</dt><dd>-</dd></dl>
-                <dl><dt>空中旋回</dt><dd>-</dd></dl>
-                <dl><dt>J速度</dt><dd>-</dd></dl>
-                <dl><dt>J反応</dt><dd>-</dd></dl>
-                <dl><dt>バランス</dt><dd>-</dd></dl>
-                <dl><dt>兵器攻撃</dt><dd>-</dd></dl>
-                <dl><dt>基本防御</dt><dd>-</dd></dl>
-                <dl><dt>HP</dt><dd>-</dd></dl>
-                <dl><dt>補正A</dt><dd>-</dd></dl>
-                <dl><dt>補正B</dt><dd>-</dd></dl>
-                <dl><dt>補正C</dt><dd>-</dd></dl>
-                <dl><dt>補正D</dt><dd>-</dd></dl>
-                <dl><dt>補正E</dt><dd>-</dd></dl>
-                <dl><dt>補正F</dt><dd>-</dd></dl>
-                <dl><dt>補正G</dt><dd>-</dd></dl>
-                <dl><dt>補正H</dt><dd>-</dd></dl>
+                <dl>
+                  <dt>腕稼働</dt>
+                  <dd data-cell="腕稼働">-</dd>
+                </dl>
+                <dl>
+                  <dt>パンチ力</dt>
+                  <dd data-cell="パンチ力">-</dd>
+                </dl>
+                <dl>
+                  <dt>GN回復</dt>
+                  <dd data-cell="GN回復">-</dd>
+                </dl>
+                <dl>
+                  <dt>GN出力</dt>
+                  <dd data-cell="GN出力">-</dd>
+                </dl>
+                <dl>
+                  <dt>ロック速度</dt>
+                  <dd data-cell="ロック速度">-</dd>
+                </dl>
+                <dl>
+                  <dt>ロック距離</dt>
+                  <dd data-cell="ロック距離">-</dd>
+                </dl>
+                <dl>
+                  <dt>射程幅</dt>
+                  <dd data-cell="射程幅">-</dd>
+                </dl>
+                <dl>
+                  <dt>B加速</dt>
+                  <dd data-cell="B加速">-</dd>
+                </dl>
+                <dl>
+                  <dt>B最高速</dt>
+                  <dd data-cell="B最高速">-</dd>
+                </dl>
+                <dl>
+                  <dt>B消費</dt>
+                  <dd data-cell="B消費">-</dd>
+                </dl>
+                <dl>
+                  <dt>歩行</dt>
+                  <dd data-cell="歩行">-</dd>
+                </dl>
+                <dl>
+                  <dt>グリップ</dt>
+                  <dd data-cell="グリップ">-</dd>
+                </dl>
+                <dl>
+                  <dt>地上旋回</dt>
+                  <dd data-cell="地上旋回">-</dd>
+                </dl>
+                <dl>
+                  <dt>空中旋回</dt>
+                  <dd data-cell=""空中旋回>-</dd>
+                </dl>
+                <dl>
+                  <dt>J速度</dt>
+                  <dd data-cell="J速度">-</dd>
+                </dl>
+                <dl>
+                  <dt>J反応</dt>
+                  <dd data-cell="J反応">-</dd>
+                </dl>
+                <dl>
+                  <dt>バランス</dt>
+                  <dd data-cell="バランス">-</dd>
+                </dl>
+                <dl>
+                  <dt>兵器攻撃</dt>
+                  <dd data-cell="兵器攻撃">-</dd>
+                </dl>
+                <dl>
+                  <dt>基本防御</dt>
+                  <dd data-cell="基本防御">-</dd>
+                </dl>
+                <dl>
+                  <dt>HP</dt>
+                  <dd data-cell="HP">-</dd>
+                </dl>
+                <dl>
+                  <dt>補正A</dt>
+                  <dd data-cell="補正A">-</dd>
+                </dl>
+                <dl>
+                  <dt>補正B</dt>
+                  <dd data-cell="補正B">-</dd>
+                </dl>
+                <dl>
+                  <dt>補正C</dt>
+                  <dd data-cell="補正C">-</dd>
+                </dl>
+                <dl>
+                  <dt>補正D</dt>
+                  <dd data-cell="補正D">-</dd>
+                </dl>
+                <dl>
+                  <dt>補正E</dt>
+                  <dd data-cell="補正E">-</dd>
+                </dl>
+                <dl>
+                  <dt>補正F</dt>
+                  <dd data-cell="補正F">-</dd>
+                </dl>
+                <dl>
+                  <dt>補正G</dt>
+                  <dd data-cell="補正G">-</dd>
+                </dl>
+                <dl>
+                  <dt>補正H</dt>
+                  <dd data-cell="補正H">-</dd>
+                </dl>
               </div>
             </section>
 
@@ -260,7 +464,9 @@
         <nav id="MAINNAV">
           <table class="borderbox">
             <thead>
-              <tr><th colspan="2">ナビゲーション</th></tr>
+              <tr>
+                <th colspan="2">ナビゲーション</th>
+              </tr>
             </thead>
             <tbody>
               <tr>
@@ -269,9 +475,9 @@
                   <span class="disabled">序章篇</span> -
                   <span class="disabled">本篇</span> -
                   <span class="disabled">BT</span> -
-                  <a href="customize/SLPM65199.html">コバルト小隊篇</a> -
+                  <a href="SLPM65199.html">コバルト小隊篇</a> -
                   <span class="disabled">2序章篇</span> -
-                  <a href="customize/SLPM65343.html">2本篇</a>
+                  <a href="SLPM65343.html">2本篇</a>
                 </td>
               </tr>
               <tr>
@@ -307,4 +513,5 @@
   <script src="../static/customize/SLPM65199-data.js" defer></script>
   <script src="../static/customize/SLPM65199-app.js" defer></script>
 </body>
+
 </html>
