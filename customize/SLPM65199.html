@@ -2,18 +2,18 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="widivh=device-widivh, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="PANZERFRAME カスタマイズシミュレータ（コバルト小隊篇）">
   <title>PANZERFRAME カスタマイズ [コバルト小隊篇]</title>
   <link rel="stylesheet" href="../static/stylesheet/style.css">
   <style>
-    .visually-hidiven {
+    .visually-hidden {
       position: absolute;
-      widivh: 1px;
+      width: 1px;
       height: 1px;
-      padiving: 0;
+      padding: 0;
       margin: -1px;
-      overflow: hidiven;
+      overflow: hidden;
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border: 0;
@@ -33,84 +33,125 @@
     <article id="ARTICLE">
       <div id="CUSTOMIZE">
 
+        <!-- LEFT -->
         <div id="LEFT">
           <form id="customize-form" action="#" method="get">
             <div id="FORM" class="borderbox">
+
               <section id="sec2" class="select" aria-label="フレーム・武装">
-                  <dl><dt><label for="select0">ヘッド</label></dt>
-                  <dd><select id="select0" name="head"></select></dd></dl>
-                  <dl><dt><label for="select1">メイン</label></dt>
-                  <dd><select id="select1" name="main"></select></dd></dl>
-                  <dl><dt><label for="select2">アーム</label></dt>
-                  <dd><select id="select2" name="arm"></select></dd></dl>
-                  <dl><dt><label for="select3">レッグ</label></dt>
-                  <dd><select id="select3" name="leg"></select></dd></dl>
-                  <dl><dt><label for="select4">左手兵器</label></dt>
-                  <dd><select id="select4" name="weapon-l"></select></dd></dl>
-                  <dl><dt><label for="select5">右手兵器</label></dt>
-                  <dd><select id="select5" name="weapon-r"></select></dd></dl>
-                  <dl><dt><label for="select6">左肩兵器</label></dt>
-                  <dd><select id="select6" name="shoulder-l"></select></dd></dl>
-                  <dl><dt><label for="select7">右肩兵器</label></dt>
-                  <dd><select id="select7" name="shoulder-r"></select></dd></dl>
-                  <dl><dt><label for="select8">ジェネレーター</label></dt>
-                  <dd><select id="select8" name="generator"></select></dd></dl>
-                  <dl><dt><label for="select9">ブースター</label></dt>
-                  <dd><select id="select9" name="booster"></select></dd></dl>
-                  <dl><dt><label for="select10">WCS</label></dt>
-                  <dd><select id="select10" name="wcs"></select></dd></dl>
-                  <dl><dt><label for="select11">レーダー</label></dt>
-                  <dd><select id="select11" name="radar"></select></dd></dl>
-                  <dl><dt><label for="select12">アーマー</label></dt>
-                  <dd><select id="select12" name="armor"></select></dd></dl>
-                  <dl><dt><label for="select13">パワーユニット</label></dt>
-                  <dd><select id="select13" name="power"></select></dd></dl>
-                  <dl><dt><label for="select14">レッグモーター</label></dt>
-                  <dd><select id="select14" name="leg-motor"></select></dd></dl>
-                  <dl><dt><label for="select15">ヒートジェル</label></dt>
-                  <dd><select id="select15" name="heat-gel"></select></dd></dl>
+                <dl>
+                  <dt><label for="select0">ヘッド</label></dt>
+                  <dd><select id="select0" name="head"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select1">メイン</label></dt>
+                  <dd><select id="select1" name="main"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select2">アーム</label></dt>
+                  <dd><select id="select2" name="arm"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select3">レッグ</label></dt>
+                  <dd><select id="select3" name="leg"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select4">左手兵器</label></dt>
+                  <dd><select id="select4" name="weapon-l"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select5">右手兵器</label></dt>
+                  <dd><select id="select5" name="weapon-r"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select6">左肩兵器</label></dt>
+                  <dd><select id="select6" name="shoulder-l"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select7">右肩兵器</label></dt>
+                  <dd><select id="select7" name="shoulder-r"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select8">ジェネレーター</label></dt>
+                  <dd><select id="select8" name="generator"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select9">ブースター</label></dt>
+                  <dd><select id="select9" name="booster"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select10">WCS</label></dt>
+                  <dd><select id="select10" name="wcs"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select11">レーダー</label></dt>
+                  <dd><select id="select11" name="radar"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select12">アーマー</label></dt>
+                  <dd><select id="select12" name="armor"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select13">パワーユニット</label></dt>
+                  <dd><select id="select13" name="power"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select14">レッグモーター</label></dt>
+                  <dd><select id="select14" name="leg-motor"></select></dd>
+                </dl>
+                <dl>
+                  <dt><label for="select15">ヒートジェル</label></dt>
+                  <dd><select id="select15" name="heat-gel"></select></dd>
+                </dl>
               </section>
 
               <section id="sec3" class="select" aria-label="排除箇所">
-                  <dl><dt><label for="select_purge">排除箇所設定</label></dt>
-                  <dd><select id="select_purge" name="purge"></select></dd></dl>
+                <dl>
+                  <dt><label for="select_purge">排除箇所設定</label></dt>
+                  <dd><select id="select_purge" name="purge"></select></dd>
+                </dl>
               </section>
 
               <section id="sec4" class="select" aria-label="機体別組立">
-                  <dl>
-                    <dt><label for="select16">機体別組立</label></dt>
-                  <dd><select id="select16" name="format"></select></dd></dl>
+                <dl>
+                  <dt><label for="select16">機体別組立</label></dt>
+                  <dd><select id="select16" name="format"></select></dd>
+                </dl>
               </section>
 
             </div>
           </form>
         </div>
 
+        <!-- RIGHT -->
         <div id="RIGHT">
           <div id="number">
-              <div>
-              <section id="sec1 BASE" aria-label="機体リソース" class="borderbox">
-                <div id="INFORMATION">
-                  <dl class="infotable">
-                    <dt>EP</dt>
-                    <dd><span>0</span>/<span>0</span></dd>
-                    <dd><meter id="EP" value="0" min="0" max="10000">meter</meter></dd>
-                  </dl>
-                  <dl class="infotable">
-                    <dt>重量</dd></dt>
-                    <dd><span>0</span>/<span>0</span></dd>
-                    <dd><meter id="WEIGHT" value="0" min="0" max="8000" low="3080" high="5459" optimum="0">meter</meter></dd>
-                  </dl>
-                  <dl class="infotable">
-                    <dt>BURM</dt>
-                    <td id="BURM">0%</dd>
-                    <td id="BURMINFO">稼働率</dd>
-                  </dl>
-                </div>
-              </section>
+<div>
+            <section id="BASE" class="borderbox" aria-label="機体リソース">
+              <div id="INFORMATION">
+                <dl class="infotable">
+                  <dt>EP</dt>
+                  <dd><span>0</span>/<span>0</span></dd>
+                  <dd><meter id="EP" value="0" min="0" max="10000"></meter></dd>
+                </dl>
+                <dl class="infotable">
+                  <dt>重量</dt>
+                  <dd><span>0</span>/<span>0</span></dd>
+                  <dd>
+                    <meter id="WEIGHT" value="0" min="0" max="8000"
+                           low="3080" high="5459" optimum="0"></meter>
+                  </dd>
+                </dl>
+                <dl class="infotable">
+                  <dt>BURM</dt>
+                  <dd id="BURM">0%</dd>
+                  <dd id="BURMINFO">稼働率</dd>
+                </dl>
+              </div>
+            </section>
 
-            <section id="sec5 EFFECT" aria-label="BURM効果" class="borderbox">
-              <h2 class="visually-hidiven">BURM効果</h2>
+            <section id="EFFECT" class="borderbox" aria-label="BURM効果">
+              <h2 class="visually-hidden">BURM効果</h2>
               <div>
                 <dl><dt>規格仕様</dt><dd>-</dd></dl>
                 <dl><dt>EP削減</dt><dd>-</dd></dl>
@@ -127,80 +168,84 @@
               </div>
             </section>
 </div>
-            <section id="sec6 GENERAL" aria-label="総合性能" class="borderbox" style="column-count: 2;">
-              <h2 class="visually-hidiven">総合性能</h2>
+            <section id="GENERAL" class="borderbox" aria-label="総合性能" style="column-count: 1;">
+              <h2 class="visually-hidden">総合性能</h2>
+
               <div title="総合値">
-                  <dl><dt scope="row">防御比</dt><dd>-</dd></dl><dl><dt scope="row">HP比</dt><dd>-</dd></dl>
-                  <dl><dt scope="row">総HP</dt><dd>-</dd></dl><dl><dt scope="row" class="framehp">外装HP</dt><td class="framehp">-</dd></dl>
-                  <dl><dt scope="row" class="innerhp">内部HP</dt><td class="innerhp">-</dd></dl><dl><dt scope="row">総EP</dt><dd>-</dd></dl>
-                  <dl><dt scope="row">基本防御</dt><dd>-</dd></dl><dl><dt scope="row" class="thermal">耐熱防御</dt><td class="thermal">-</dd></dl>
-                  <dl><dt scope="row" class="impulse">耐衝撃防御</dt><td class="impulse">-</dd></dl><dl><dt scope="row">パンチ力</dt><dd>-</dd></dl>
+                <dl><dt>防御比</dt><dd>-</dd></dl>
+                <dl><dt>HP比</dt><dd>-</dd></dl>
+                <dl><dt>総HP</dt><dd>-</dd></dl>
+                <dl><dt class="framehp">外装HP</dt><dd class="framehp">-</dd></dl>
+                <dl><dt class="innerhp">内部HP</dt><dd class="innerhp">-</dd></dl>
+                <dl><dt>総EP</dt><dd>-</dd></dl>
+                <dl><dt>基本防御</dt><dd>-</dd></dl>
+                <dl><dt class="thermal">耐熱防御</dt><dd class="thermal">-</dd></dl>
+                <dl><dt class="impulse">耐衝撃防御</dt><dd class="impulse">-</dd></dl>
+                <dl><dt>パンチ力</dt><dd>-</dd></dl>
               </div>
+
               <div title="レッグ">
-                  <dl><dt scope="row">最大積載</dt><dd>-</dd></dl><dl><dt scope="row">歩行速度</dt><dd>-</dd></dl>
-                  <dl><dt scope="row">地上旋回</dt><dd>-</dd></dl><dl><dt scope="row">空中旋回</dt><dd>-</dd></dl>
+                <dl><dt>最大積載</dt><dd>-</dd></dl>
+                <dl><dt>歩行速度</dt><dd>-</dd></dl>
+                <dl><dt>地上旋回</dt><dd>-</dd></dl>
+                <dl><dt>空中旋回</dt><dd>-</dd></dl>
               </div>
+
               <div title="ジェネレーター">
-                  <dl><dt scope="row">出力</dt><dd>-</dd></dl><dl><dt scope="row">最大EP</dt><dd>-</dd></dl>
-                  <dl><dt scope="row">限界域</dt><dd>-</dd></dl><dl><dt scope="row">回復力</dt><dd>-</dd></dl>
+                <dl><dt>出力</dt><dd>-</dd></dl>
+                <dl><dt>最大EP</dt><dd>-</dd></dl>
+                <dl><dt>限界域</dt><dd>-</dd></dl>
+                <dl><dt>回復力</dt><dd>-</dd></dl>
               </div>
+
               <div title="ブースター">
-                  <dl><dt scope="row">消費出力</dt><dd>-</dd></dl><dl><dt scope="row">最高速度</dt><dd>-</dd></dl>
-                  <dl><dt scope="row">重力補正</dt><dd>-</dd></dl><dl><dt scope="row">加速力</dt><dd>-</dd></dl>
+                <dl><dt>消費出力</dt><dd>-</dd></dl>
+                <dl><dt>最高速度</dt><dd>-</dd></dl>
+                <dl><dt>重力補正</dt><dd>-</dd></dl>
+                <dl><dt>加速力</dt><dd>-</dd></dl>
               </div>
+
               <div title="レーダー">
-                  <dl><dt scope="row">索敵範囲</dt><dd>-</dd></dl><dl><dt scope="row">タイプ</dt><dd>-</dd></dl>
+                <dl><dt>索敵範囲</dt><dd>-</dd></dl>
+                <dl><dt>タイプ</dt><dd>-</dd></dl>
               </div>
+
               <div title="その他">
-                  <dl><dt scope="row"></dt><dd>-</dd></dl>
+                <dl><dt></dt><dd>-</dd></dl>
               </div>
             </section>
 
-            <section id="sec7 CORRECTION" aria-label="補正値" class="borderbox">
-              <h2 class="visually-hidiven">補正値</h2>
+            <section id="CORRECTION" class="borderbox" aria-label="補正値">
+              <h2 class="visually-hidden">補正値</h2>
               <div style="column-count: 2;">
-                  <dl>
-                    <dt scope="row">腕稼働</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">パンチ力</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">GN回復</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">GN出力</dt><dd>-</dd>
-                  </dl>
-                  <dl>
-                    <dt scope="row">ロック速度</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">ロック距離</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">射程幅</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">B加速</dt><dd>-</dd>
-                  </dl>
-                  <dl>
-                    <dt scope="row">B最高速</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">B消費</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">歩行</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">グリップ</dt><dd>-</dd>
-                  </dl>
-                  <dl>
-                    <dt scope="row">地上旋回</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">空中旋回</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">J速度</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">J反応</dt><dd>-</dd>
-                  </dl>
-                  <dl>
-                    <dt scope="row">バランス</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">兵器攻撃</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">基本防御</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">HP</dt><dd>-</dd>
-                  </dl>
-                  <dl>
-                    <dt scope="row">補正A</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">補正B</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">補正C</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">補正D</dt><dd>-</dd>
-                  </dl>
-                  <dl>
-                    <dt scope="row">補正E</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">補正F</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">補正G</dt><dd>-</dd></dl><dl>
-                    <dt scope="row">補正H</dt><dd>-</dd>
-                  </dl>
+                <dl><dt>腕稼働</dt><dd>-</dd></dl>
+                <dl><dt>パンチ力</dt><dd>-</dd></dl>
+                <dl><dt>GN回復</dt><dd>-</dd></dl>
+                <dl><dt>GN出力</dt><dd>-</dd></dl>
+                <dl><dt>ロック速度</dt><dd>-</dd></dl>
+                <dl><dt>ロック距離</dt><dd>-</dd></dl>
+                <dl><dt>射程幅</dt><dd>-</dd></dl>
+                <dl><dt>B加速</dt><dd>-</dd></dl>
+                <dl><dt>B最高速</dt><dd>-</dd></dl>
+                <dl><dt>B消費</dt><dd>-</dd></dl>
+                <dl><dt>歩行</dt><dd>-</dd></dl>
+                <dl><dt>グリップ</dt><dd>-</dd></dl>
+                <dl><dt>地上旋回</dt><dd>-</dd></dl>
+                <dl><dt>空中旋回</dt><dd>-</dd></dl>
+                <dl><dt>J速度</dt><dd>-</dd></dl>
+                <dl><dt>J反応</dt><dd>-</dd></dl>
+                <dl><dt>バランス</dt><dd>-</dd></dl>
+                <dl><dt>兵器攻撃</dt><dd>-</dd></dl>
+                <dl><dt>基本防御</dt><dd>-</dd></dl>
+                <dl><dt>HP</dt><dd>-</dd></dl>
+                <dl><dt>補正A</dt><dd>-</dd></dl>
+                <dl><dt>補正B</dt><dd>-</dd></dl>
+                <dl><dt>補正C</dt><dd>-</dd></dl>
+                <dl><dt>補正D</dt><dd>-</dd></dl>
+                <dl><dt>補正E</dt><dd>-</dd></dl>
+                <dl><dt>補正F</dt><dd>-</dd></dl>
+                <dl><dt>補正G</dt><dd>-</dd></dl>
+                <dl><dt>補正H</dt><dd>-</dd></dl>
               </div>
             </section>
 
@@ -209,7 +254,6 @@
 
       </div>
     </article>
-
 
     <footer id="FOOTER">
       <div>
@@ -258,7 +302,6 @@
         <p><small>&copy; 2012–2026 ALNAME</small></p>
       </div>
     </footer>
-
   </div>
 
   <script src="../static/customize/SLPM65199-data.js" defer></script>
