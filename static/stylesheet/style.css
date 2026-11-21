@@ -590,12 +590,11 @@ input[type="checkbox"] {
 }
 #SALVAGE dd {
   display: inline-block;
-  min-width: 6em;
   margin: 0 12px 4px 0;
 }
 
 #SALVAGE .table {
-  column-count: 3;
+  column-count: 4;
   column-gap: 20px;
 }
 #SALVAGE .table > dl {
@@ -603,6 +602,11 @@ input[type="checkbox"] {
   padding-bottom: 4px;
   margin-bottom: 4px;
   break-inside: avoid;
+  display:grid;
+  grid-template-columns: 7.5em 1fr;
+}
+#SALVAGE .table > dl.multi {
+  grid-template-columns: 7.5em 1fr auto 1fr;
 }
 
 #SALVAGE .column {
