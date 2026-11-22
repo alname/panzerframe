@@ -419,7 +419,6 @@ meter::-webkit-meter-even-less-good-value {
   margin-left: 1px;
 }
 #CORRECTION dd:after {
-  content: "%";
   display: inline-block;
   width: 0.9em;
   text-align: left;

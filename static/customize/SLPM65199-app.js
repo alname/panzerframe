@@ -258,43 +258,107 @@
     parr[16] = data[14][parr[0][10]] || data[14][0];
     parr[17] = data[14][parr[1][8]] || data[14][0];
 
-    // Reset flags
+
+    // Reset flags / BURM state
     state.burmRate = 0;
     state.flags.formatFrame = 0;
     state.flags.formatPerfect = 0;
     state.flags.irregular = 0;
+    state.flags.weightAgreement = false;
+    state.flags.weightNearmiss = false;
 
-    // Format check
+    let symmetry = 0;
+    let special = 0;
+    let noweapon = 0;
+    let weaponpower = 0;
+    let atsyncro = 0;
+    let personal = 0;
+    let flgEnergyAgreement = false;
+
+    // Format check (外装4スロット + 完全一致)
     const f1 = [arr[0], arr[1], arr[2], arr[3]].join(",");
     if (formatarr) {
       for (let i = 1; i < Math.min(33, formatarr.length); i++) {
         const head = formatarr[i].slice(0, 4).join(",");
         if (f1 === head) {
           state.flags.formatFrame = i;
-          state.flags.formatPerfect = arr.join(",") === formatarr[i].join(",") ? i : 0;
+          state.flags.formatPerfect =
+            arr.join(",") === formatarr[i].join(",") ? i : 0;
           break;
         }
       }
     }
 
+    // symmetry // ヘッドフレーム0x8 / 腕兵器0x4 / 肩兵器0x2 / 肩装備0x1
+    if (parr[0][12]) symmetry |= 0x8;
+    if (arr[4] === arr[5]) symmetry |= 0x4;
+    if (arr[6] === arr[7]) symmetry |= 0x2;
+    if (arr[6] + arr[7] > 0) symmetry |= 0x1;
+
+    // personal (専用兵器)
+    personal =
+      state.flags.formatPerfect === 23 ? 1 : // アシュラ
+      state.flags.formatPerfect === 9 ? 2 : // アルサレアGS
+      state.flags.formatPerfect === 29 ? 3 : // アリス
+      state.flags.formatPerfect === 25 ? 4 : // ラセツ
+      state.flags.formatPerfect === 30 ? 5 : // リリス
+      state.flags.formatPerfect === 31 ? 6 : // マリア
+      arr[14] === 10 && (arr[4] === 33 || arr[5] === 33) ? 7 :
+      parr[0][11] && parr[1][9] && parr[2][10] && parr[3][13] && (arr[4] === 34 || arr[5] === 34) ? 8 :
+      parr[0][11] && parr[1][9] && parr[2][10] && parr[3][13] && arr[4] === 35 && arr[5] === 35 ? 9 :
+      parr[0][11] && parr[1][9] && parr[2][10] && parr[3][13] && (arr[4] === 35 || arr[5] === 35) ? 10 :
+      0;
+
+    // special flags
+    if ((arr[6] === 8 && arr[7] === 8) || (arr[6] === 25 && arr[7] === 25)) special |= 0x0001;
+    if (arr[6] === 34 && arr[7] === 34) special |= 0x0002;
+    if ((special & 0x1 || special & 0x2) && (arr[3] === 2 || arr[3] === 28)) special |= 0x0004;
+    if (arr[0] === 23) special |= 0x0008;
+    if (arr[0] === 13) special |= 0x0010;
+    if (arr[0] === 12) special |= 0x0020;
+    if (arr[4] === 36 && arr[5] === 36) special |= 0x0040;
+    if (arr[4] === 65 || arr[5] === 65) special |= 0x0080;
+    if (arr[6] === 16 || arr[7] === 16) special |= 0x0100;
+    if (arr[6] === 42 || arr[7] === 42) special |= 0x0200;
+    if (special & 0x200 && parr[4][15] > 0 && parr[5][15] > 0) special |= 0x0400;
+    if (arr[6] === 20 || arr[7] === 20) special |= 0x0800;
+    if (arr[12] === 9) special |= 0x1000;
+    if (arr[12] === 8) special |= 0x2000;
+    if (arr[1] === 24) special |= 0x4000;
+    if (special > 0) special |= 0x8000;
+
+    // noweapon // 肩無装0x8 / ウィング等0x4 / ミサイルショット0x2 / 腕無装0x1
+    if (arr[6] + arr[7] === 0) noweapon |= 0x8;
+    if (
+      (arr[6] === 8 && arr[7] === 8) ||
+      (arr[6] === 25 && arr[7] === 25) ||
+      (arr[6] === 34 && arr[7] === 34) ||
+      arr[6] === 16 ||
+      arr[7] === 16
+    ) {
+      noweapon |= 0x4;
+    }
+    if (arr[6] === 20 || arr[7] === 20) noweapon |= 0x2;
+    if (arr[4] + arr[5] === 0) noweapon |= 0x1;
+
+    // atsyncro // 左腕0x8 右腕0x4 左肩0x2 右肩0x1
+    const armAttr = parr[2][8];
+    const lim = armAttr === 2 ? 6 : 7;
+    if (parr[4][5] === 0 || parr[4][5] === armAttr || parr[4][5] > lim) atsyncro |= 0x8;
+    if (parr[5][5] === 0 || parr[5][5] === armAttr || parr[5][5] > lim) atsyncro |= 0x4;
+    if (parr[6][5] === 0 || parr[6][5] === armAttr || parr[6][5] > lim) atsyncro |= 0x2;
+    if (parr[7][5] === 0 || parr[7][5] === armAttr || parr[7][5] > lim) atsyncro |= 0x1;
+
     // Base corr
     let corr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, false, false, 1, 1, 1, 1, 1, 1];
     state.corr = corr;
 
-    // Part multipliers from power unit / head etc.
-    corr[1] *= Number(parr[13][7]) || 1;
-    corr[4] *= Number(parr[0][7]) || 1;
-    corr[17] *= Number(parr[13][8]) || 1;
-    corr[26] *= Number(parr[0][8]) || 1;
-    corr[27] *= Number(parr[0][9]) || 1;
-
     // Totals
     let weight = 0;
-    let energy = 0;
-    for (let i = 0; i < PART_COUNT; i++) {
-      weight += parr[i][1] || 0;
-    }
-    energy =
+    for (let i = 0; i < PART_COUNT; i++) weight += parr[i][1] || 0;
+    console.log(weight)
+    console.log(parr)
+    let energy =
       (parr[0][2] || 0) +
       (parr[1][2] || 0) +
       (parr[2][2] || 0) +
@@ -311,6 +375,31 @@
     state.totals.weightCap = Math.trunc((parr[3][7] || 0) * (parr[14][9] || 1));
     state.totals.energyCap = parr[8][3] || 0;
 
+    const HP_frame = (parr[0][3] || 0) + (parr[1][3] || 0) + (parr[2][3] || 0) + (parr[3][3] || 0);
+    let HP_inner = Math.trunc(
+      ((parr[8][5] || 0) +
+        (parr[9][5] || 0) +
+        (parr[11][5] || 0) +
+        (parr[12][3] || 0) +
+        (parr[13][4] || 0) +
+        (parr[14][3] || 0)) *
+        (parr[1][7] || 1)
+    );
+    const HP_total = HP_frame + HP_inner;
+
+    const def_size_impulse =
+      (parr[0][5] || 0) + (parr[1][5] || 0) + (parr[2][5] || 0) + (parr[3][5] || 0) +
+      (parr[8][6] || 0) + (parr[9][6] || 0) + (parr[11][6] || 0) + (parr[12][4] || 0) +
+      (parr[13][5] || 0) + (parr[14][4] || 0);
+    const def_size_thermal =
+      (parr[0][6] || 0) + (parr[1][6] || 0) + (parr[2][6] || 0) + (parr[3][6] || 0) +
+      (parr[8][7] || 0) + (parr[9][7] || 0) + (parr[11][7] || 0) + (parr[13][6] || 0) +
+      (parr[14][5] || 0);
+    const def_size_total = def_size_impulse + def_size_thermal || 1;
+    const def_ratio_impulse = Math.trunc((def_size_impulse / def_size_total) * 100);
+    const def_ratio_thermal = 100 - def_ratio_impulse;
+    const def_total = (parr[0][4] || 0) + (parr[1][4] || 0) + (parr[2][4] || 0) + (parr[3][4] || 0);
+
     const wt = weightTotal(true);
     const wc = weightCapacity();
     const et = energyTotal(true);
@@ -318,12 +407,17 @@
 
     state.flags.weightAgreement = wt === wc;
     state.flags.weightNearmiss = wt + 1 === wc;
-    state.flags.irregular |= parr[8][9] ? 0x4 : 0;
-    state.flags.irregular |= et > ec ? 0x2 : 0;
-    state.flags.irregular |= wt > wc ? 0x1 : 0;
+    flgEnergyAgreement = et === ec;
 
-    // Weight rank / BURM effects
-    const weightUsage = weight / (wc || 1);
+    let iregurar = 0;
+    if (parr[8][9]) iregurar |= 0x4;
+    if (et > ec) iregurar |= 0x2;
+    if (wt > wc) iregurar |= 0x1;
+    state.flags.irregular = iregurar;
+
+    const energy_usage = energy / (ec || 1);
+    const weight_usage = weight / (wc || 1);
+
     const wrank =
       weight < 924 ? 0 :
       weight < 1231 ? 1 :
@@ -339,85 +433,343 @@
     let crank = 5;
     if (wrank < 5) {
       crank =
-        weightUsage < 0.2 ? 0 : weightUsage < 0.22 ? 1 : weightUsage < 0.35 ? 2 :
-        weightUsage < 0.4 ? 3 : weightUsage < 0.49 ? 4 : weightUsage < 0.84 ? 5 :
-        weightUsage < 0.9 ? 6 : weightUsage < 0.94 ? 7 : weightUsage < 0.96 ? 8 :
-        weightUsage < 0.98 ? 9 : 10;
+        weight_usage < 0.2 ? 0 : weight_usage < 0.22 ? 1 : weight_usage < 0.35 ? 2 :
+        weight_usage < 0.4 ? 3 : weight_usage < 0.49 ? 4 : weight_usage < 0.84 ? 5 :
+        weight_usage < 0.9 ? 6 : weight_usage < 0.94 ? 7 : weight_usage < 0.96 ? 8 :
+        weight_usage < 0.98 ? 9 : 10;
     } else if (wrank > 5) {
       crank =
-        weightUsage < 0.2 ? 0 : weightUsage < 0.32 ? 1 : weightUsage < 0.44 ? 2 :
-        weightUsage < 0.5 ? 3 : weightUsage < 0.6 ? 4 : weightUsage < 0.8 ? 5 :
-        weightUsage < 0.9 ? 6 : weightUsage < 0.94 ? 7 : weightUsage < 0.96 ? 8 :
-        weightUsage < 0.98 ? 9 : 10;
+        weight_usage < 0.2 ? 0 : weight_usage < 0.32 ? 1 : weight_usage < 0.44 ? 2 :
+        weight_usage < 0.5 ? 3 : weight_usage < 0.6 ? 4 : weight_usage < 0.8 ? 5 :
+        weight_usage < 0.9 ? 6 : weight_usage < 0.94 ? 7 : weight_usage < 0.96 ? 8 :
+        weight_usage < 0.98 ? 9 : 10;
     }
 
+    // EFFECT cells in document order = bn 0..11
     const burmarr = new Array(12).fill(0);
     const Bbox = $$("#EFFECT [data-cell]");
+    // fallback: plain dd if data-cell missing
+    const BboxAlt = Bbox.length >= 12 ? Bbox : $$("#EFFECT dd");
 
-    function setBurm(bn, index) {
+    function setBurm(bn, index, options) {
       burmarr[bn] = index;
-      if (BURMcorr[bn] && BURMcorr[bn][index]) {
-        if (Bbox[bn]) setText(Bbox[bn], BURMcorr[bn][index][1]);
-        applyBurm(corr, BURMcorr[bn][index]);
-        state.burmRate += BURMcorr[bn][index][3] || 0;
+      const row = BURMcorr[bn] && BURMcorr[bn][index];
+      if (!row) return;
+      if (!(options && options.skipDisplay) && BboxAlt[bn]) {
+        setText(BboxAlt[bn], row[1]);
+      }
+      if (!(options && options.skipApply)) {
+        applyBurm(corr, row);
+        state.burmRate += row[3] || 0;
       }
     }
 
-    // 機体重量 bn=9
-    setBurm(9, state.flags.formatFrame ? 0 : wrank < 5 ? wrank + 1 : wrank > 5 ? 16 - wrank : 0);
+    // Pre-multipliers (power unit / head) — same as original before b9
+    corr[1] *= Number(parr[13][7]) || 1;
+    corr[4] *= Number(parr[0][7]) || 1;
+    corr[17] *= Number(parr[13][8]) || 1;
+    corr[26] *= Number(parr[0][8]) || 1;
+    corr[27] *= Number(parr[0][9]) || 1;
 
-    // 積載量 bn=4
-    let loadIdx = 0;
-    if (state.flags.formatPerfect) loadIdx = 23;
-    else if (state.flags.weightNearmiss) loadIdx = 22;
-    else if (burmarr[9] === 0 && state.flags.weightAgreement && wrank === 5) loadIdx = 21;
-    else if (wrank < 5) loadIdx = crank < 5 ? crank + 1 : crank > 5 ? 16 - crank : 0;
-    else if (wrank > 5) loadIdx = crank < 5 ? crank + 11 : crank > 5 ? 26 - crank : 0;
-    setBurm(4, loadIdx);
-
-    // Remaining BURM slots: use index 0 as safe default when complex conditions omitted
-    // (Full original has many special cases; core load/weight are applied above)
-    for (const bn of [0, 1, 3, 5, 6, 7, 8, 11]) {
-      if (!burmarr[bn]) setBurm(bn, 0);
+    // ---- b9 機体重量 ----
+    burmarr[9] = state.flags.formatFrame
+      ? 0
+      : wrank < 5
+        ? wrank + 1
+        : wrank > 5
+          ? 16 - wrank
+          : 0;
+    setBurm(9, burmarr[9]);
+    if ((parr[3][8] || 0) * (parr[14][7] || 1) * (corr[10] || 1) >= 30) {
+      const mul = [1, 0.77, 0.82, 0.9, 0.95, 0.98, 2.1, 1.92, 1.8, 1.35, 1.25][burmarr[9]];
+      if (mul != null) corr[10] *= mul;
     }
 
-    // Derived stats
-    const hpFrame = (parr[0][3] || 0) + (parr[1][3] || 0) + (parr[2][3] || 0) + (parr[3][3] || 0);
-    const hpInner = Math.trunc(
-      ((parr[8][5] || 0) + (parr[9][5] || 0) + (parr[11][5] || 0) + (parr[12][3] || 0) + (parr[13][4] || 0) + (parr[14][3] || 0)) *
-        (parr[1][7] || 1)
+    // ---- b4 積載量 ----
+    if (state.flags.formatPerfect) {
+      burmarr[4] = 23;
+    } else if (state.flags.weightNearmiss) {
+      burmarr[4] = 22;
+    } else if (burmarr[9] === 0 && state.flags.weightAgreement && wrank === 5) {
+      burmarr[4] = 21;
+    } else if (wrank < 5) {
+      burmarr[4] = crank < 5 ? crank + 1 : crank > 5 ? 16 - crank : 0;
+    } else if (wrank > 5) {
+      burmarr[4] = crank < 5 ? crank + 11 : crank > 5 ? 26 - crank : 0;
+    } else {
+      burmarr[4] = 0;
+    }
+    setBurm(4, burmarr[4]);
+    {
+      const bn4 = burmarr[4];
+      if (bn4 === 23) {
+        const punchBase = Math.trunc((parr[2][7] || 0) * corr[1]);
+        corr[1] *= punchBase < 300 ? 8.15 : punchBase < 1000 ? 3 : punchBase < 2000 ? 1.5 : 1.15;
+        corr[7] *= (parr[9][4] || 0) * corr[7] <= 1 ? 3 : (parr[9][4] || 0) * corr[7] <= 3 ? 2 : (parr[9][4] || 0) * corr[7] <= 10 ? 1.5 : 1;
+        corr[10] *= (parr[3][8] || 0) * (parr[14][7] || 1) * corr[10] < 9 ? 2.1 : 1.3;
+        if (Math.trunc(HP_frame * corr[19]) + HP_inner < 9000) {
+          const d = Math.trunc(def_total * corr[18]);
+          corr[18] *= d < 1500 ? 2 : d < 2000 ? 1.5 : d < 2500 ? 1.3 : 1.03;
+        }
+      } else if (bn4 === 22) {
+        const punchBase = Math.trunc((parr[2][7] || 0) * corr[1]);
+        corr[1] *= punchBase < 300 ? 4.1 : punchBase < 1000 ? 1.5 : punchBase < 2000 ? 1.1 : 1.01;
+        corr[10] *= (parr[3][8] || 0) * (parr[14][7] || 1) * corr[10] < 9 ? 1.7 : 1.05;
+      } else if (bn4 > 5 && bn4 <= 10) {
+        if (Math.trunc((parr[8][2] || 0) * corr[3]) >= 1000) {
+          corr[3] *= [0.8, 0.85, 0.9, 0.94, 0.98][bn4 - 6];
+        }
+        if ((parr[3][8] || 0) * (parr[14][7] || 1) * corr[10] <= 20) {
+          corr[10] *= [1.28, 1.14, 1.1, 1.08, 1.02][bn4 - 6];
+        }
+      } else if (bn4 > 15 && bn4 <= 20) {
+        if (Math.trunc((parr[8][2] || 0) * corr[3]) >= 6000) {
+          corr[3] *= [0.1, 0.2, 0.3, 0.4, 0.5][bn4 - 16];
+        }
+        if ((parr[3][8] || 0) * (parr[14][7] || 1) * corr[10] <= 10) {
+          corr[10] *= [1.2, 1.19, 1.17, 1.17, 1.12][bn4 - 16];
+        }
+      }
+    }
+
+    // ---- b0 規格仕様 ----
+    {
+      let idx = 0;
+      if (state.flags.formatPerfect) idx = 3;
+      else if (state.flags.formatFrame) idx = 5;
+      else if (Math.trunc(HP_frame * corr[19]) + HP_inner >= 15000 && def_total >= 5500) idx = 4;
+      else if (Math.trunc(HP_frame * corr[19]) + HP_inner >= 15000) idx = 1;
+      else if (def_total >= 5500) idx = 2;
+      setBurm(0, idx);
+    }
+
+    // ---- b2 BMS限界 (表示は index0、補正のみ) ----
+    setBurm(2, 0);
+
+    // ---- b3 専用兵器 ----
+    setBurm(3, personal);
+
+    // ---- b5 特殊装備 ----
+    burmarr[5] = special > 0 ? 1 : 0;
+    if (BboxAlt[5] && BURMcorr[5] && BURMcorr[5][burmarr[5]]) {
+      setText(BboxAlt[5], BURMcorr[5][burmarr[5]][1]);
+    }
+    for (let n = 1; n < 17; n++) {
+      if (special & (1 << (n - 1))) {
+        if (BURMcorr[5] && BURMcorr[5][n]) {
+          applyBurm(corr, BURMcorr[5][n]);
+          state.burmRate += BURMcorr[5][n][3] || 0;
+        }
+      }
+    }
+
+    // ---- b6 無装備 ----
+    burmarr[6] = 0;
+    if (!state.flags.formatFrame && (noweapon & 1) && noweapon > 1) {
+      burmarr[6] =
+        (wrank < 5 ? 0 : wrank > 5 ? 6 : 3) +
+        ((noweapon & 9) === 9 ? 1 : (noweapon & 5) === 5 ? 2 : (noweapon & 3) === 3 ? 3 : 0);
+    }
+    setBurm(6, burmarr[6]);
+    if (burmarr[6] > 0 && burmarr[6] <= 3) {
+      const punchNow = Math.trunc((parr[2][7] || 0) * corr[1]);
+      corr[1] *=
+        punchNow < 101
+          ? (1.25 * (Math.trunc(HP_frame * corr[19]) + HP_inner)) / (punchNow || 1)
+          : wrank < 5
+            ? 2.45
+            : wrank > 5
+              ? 1.2
+              : 1.5;
+    }
+    if (burmarr[6] === 1) {
+      const hpNow = Math.trunc(HP_frame * corr[19]) + Math.trunc(HP_inner * corr[19]);
+      corr[19] *= hpNow < 5000 ? (1.25 * (Math.trunc(HP_frame * corr[19]) + HP_inner)) / (weight || 1) : 1.4;
+    }
+
+    // ---- b7 攻属特化 ----
+    weaponpower =
+      Math.trunc((parr[2][7] || 0) * (parr[13][7] || 1)) +
+      ((parr[4][15] === 0 ? (parr[4][4] || 0) * (parr[13][8] || 1) : parr[4][4] || 0) * (parr[13][8] || 1)) +
+      ((parr[5][15] === 0 ? (parr[5][4] || 0) * (parr[13][8] || 1) : parr[5][4] || 0) * (parr[13][8] || 1)) +
+      (parr[6][4] || 0) * (parr[13][8] || 1) +
+      (parr[7][4] || 0) * (parr[13][8] || 1);
+    burmarr[7] = 0;
+    if (weaponpower >= 1000) {
+      if (parr[2][8] === 2) {
+        burmarr[7] =
+          (parr[4][5] === 2 || parr[4][5] === 7) &&
+          (parr[5][5] === 2 || parr[5][5] === 7) &&
+          parr[6][5] === 2 &&
+          parr[7][5] === 2
+            ? 1
+            : atsyncro === 0xf
+              ? 5
+              : 0;
+      } else if (parr[2][8] === 3) {
+        burmarr[7] =
+          parr[4][5] === 3 && parr[5][5] === 3 && parr[6][5] === 3 && parr[7][5] === 3
+            ? 2
+            : atsyncro === 0xf
+              ? 6
+              : 0;
+      } else if (parr[2][8] === 4) {
+        burmarr[7] =
+          parr[4][5] === 4 && parr[5][5] === 4 && parr[6][5] === 4 && parr[7][5] === 4
+            ? 3
+            : atsyncro === 0xf
+              ? 7
+              : 0;
+      } else if (parr[2][8] === 5) {
+        burmarr[7] =
+          parr[4][5] === 5 && parr[5][5] === 5 && parr[6][5] === 5 && parr[7][5] === 5
+            ? 4
+            : atsyncro === 0xf
+              ? 8
+              : 0;
+      }
+    }
+    setBurm(7, burmarr[7]);
+
+    // ---- b10 武装形態 ----
+    setBurm(10, 0);
+
+    // ---- b11 左右対称 ----
+    burmarr[11] =
+      (symmetry & 14) === 14 ? 1 : (symmetry & 6) === 6 ? 2 : (symmetry & 3) === 3 ? 3 : 0;
+    setBurm(11, burmarr[11]);
+
+    // ---- b1 EP削減 (burm_rate 参照のため後段) ----
+    burmarr[1] = 0;
+    if (state.flags.formatFrame) {
+      burmarr[1] = 0;
+    } else if (flgEnergyAgreement && (iregurar & 3) === 0) {
+      burmarr[1] = 11;
+    } else if (wrank === 5) {
+      if (energy_usage < 0.69) burmarr[1] = 12;
+      else if (state.burmRate === 0) burmarr[1] = def_ratio_thermal === def_ratio_impulse ? 14 : 13;
+    } else if ((iregurar & 3) === 0 && wrank < 5) {
+      burmarr[1] =
+        energy_usage < 0.51 ? 1 :
+        energy_usage < 0.61 ? 2 :
+        energy_usage < 0.68 ? 3 :
+        energy_usage < 0.71 ? 4 :
+        energy_usage < 0.78 ? 5 : 0;
+    } else if ((iregurar & 3) === 0 && wrank > 5) {
+      burmarr[1] =
+        energy_usage < 0.31 ? 6 :
+        energy_usage < 0.45 ? 7 :
+        energy_usage < 0.55 ? 8 :
+        energy_usage < 0.66 ? 9 :
+        energy_usage < 0.78 ? 10 : 0;
+    }
+    setBurm(1, burmarr[1]);
+    if (burmarr[1] === 13) {
+      const hpN = Math.trunc(HP_frame * corr[19]) + HP_inner;
+      const dN = Math.trunc(def_total * corr[18]);
+      corr[18] *= dN < 2000 && hpN < 9000 ? 1.7 : hpN < 9000 ? 1.05 : 1;
+    } else if (burmarr[1] === 14) {
+      const hpN = Math.trunc(HP_frame * corr[19]) + HP_inner;
+      const dN = Math.trunc(def_total * corr[18]);
+      corr[18] *= dN < 2000 && hpN < 9000 ? 2.3 : dN < 3000 && hpN < 9000 ? 1.5 : hpN < 9000 ? 1.07 : 1;
+    }
+
+    // ---- b8 防御特化 ----
+    burmarr[8] = 0;
+    if (
+      (iregurar & 3) === 0 &&
+      def_ratio_thermal === def_ratio_impulse &&
+      Math.trunc(HP_frame * corr[19]) + HP_inner < 9000 &&
+      Math.trunc(def_total * corr[18]) < 2000
+    ) {
+      burmarr[8] = 9;
+    } else if (wrank < 5) {
+      burmarr[8] =
+        def_size_impulse >= def_size_thermal * 5 ? 1 :
+        def_size_impulse >= def_size_thermal * 3 ? 2 :
+        def_size_impulse * 5 <= def_size_thermal ? 3 :
+        def_size_impulse * 3 <= def_size_thermal ? 4 : 0;
+    } else if (wrank > 5) {
+      burmarr[8] =
+        def_size_impulse >= def_size_thermal * 8 ? 5 :
+        def_size_impulse >= def_size_thermal * 6 ? 6 :
+        def_size_impulse >= def_size_thermal * 8 ? 7 :
+        def_size_impulse >= def_size_thermal * 6 ? 8 : 0;
+    }
+    setBurm(8, burmarr[8]);
+
+    // expose for later display helpers
+    const hpFrame = HP_frame;
+    const hpInner = HP_inner;
+    const hpTotal = HP_total;
+    const defImp = def_size_impulse;
+    const defTh = def_size_thermal;
+
+    // =========================================================================
+    // num: final stats after BURM corr + heat-gel bonuses (from SLPM65199.js)
+    // gel indices (select15): 2内HP 3外HP 5歩行 6GN回復 7ブースト 8ジャンプ 9防御 10旋回
+    // (1重量-1000 / 4EP-1000 are applied in weightTotal/energyTotal)
+    // =========================================================================
+    const def_ratio_result =
+      def_ratio_impulse > def_ratio_thermal ? 0.5 :
+      def_ratio_impulse < def_ratio_thermal ? -0.5 : 0;
+
+    const gel = arr[15];
+
+    const last_HP_frame =
+      Math.trunc(HP_frame * corr[19]) + (gel === 3 ? 1000 : 0);
+    const last_HP_inner = HP_inner + (gel === 2 ? 1000 : 0);
+    const last_HP_total = last_HP_frame + last_HP_inner;
+
+    const last_def_total =
+      Math.trunc(def_total * corr[18]) + (gel === 9 ? 1000 : 0);
+    const last_def_total_impulse = Math.trunc(
+      (last_def_total * (2 + def_ratio_result) * def_ratio_impulse) / 100
     );
-    const hpTotal = hpFrame + hpInner;
-    const hpRatioInner = hpTotal ? Math.trunc((hpInner / hpTotal) * 100) : 0;
+    const last_def_total_thermal = Math.trunc(
+      (last_def_total * (2 - def_ratio_result) * def_ratio_thermal) / 100
+    );
+
+    const last_st_walk = (
+      (parr[3][8] || 0) * (parr[14][7] || 1) * (corr[10] || 1) +
+      (gel === 5 ? 10 : 0)
+    ).toFixed(1);
+    const last_st_jump = gel === 8 ? 10 : 0;
+    const last_st_turn_rand =
+      (parr[3][10] || 0) + (corr[12] || 0) + (gel === 10 ? 10 : 0);
+    const last_st_turn_air =
+      (parr[3][11] || 0) + (corr[13] || 0) + (gel === 10 ? 10 : 0);
+    const last_st_grip = (parr[3][12] || 0) * (corr[11] || 1);
+
+    const last_st_genererater =
+      Math.trunc((parr[8][4] || 0) * (corr[2] || 1)) + (gel === 6 ? 10 : 0);
+    const last_st_genererater_gain = Math.trunc(
+      (parr[8][2] || 0) * (corr[3] || 1)
+    );
+    const last_st_genererater_redzone = Math.trunc(
+      (parr[8][8] || 0) * (corr[23] || 1)
+    );
+
+    const last_st_booster_waste = (
+      (parr[9][2] || 0) * (corr[9] || 1)
+    ).toFixed(1);
+    const last_st_booster_speed = (
+      (parr[9][3] || 0) * (corr[8] || 1) + (gel === 7 ? 10 : 0)
+    ).toFixed(1);
+    const last_st_booster_accel = (
+      (parr[9][4] || 0) * (corr[7] || 1) + (gel === 7 ? 10 : 0)
+    ).toFixed(1);
+
+    const last_punch = Math.trunc((parr[2][7] || 0) * (corr[1] || 1));
+
+    // ratios from post-gel HP
+    const hpRatioInner = last_HP_total
+      ? Math.trunc((last_HP_inner / last_HP_total) * 100)
+      : 0;
     const hpRatioFrame = 100 - hpRatioInner;
 
-    const defImp =
-      (parr[0][5] || 0) + (parr[1][5] || 0) + (parr[2][5] || 0) + (parr[3][5] || 0) +
-      (parr[8][6] || 0) + (parr[9][6] || 0) + (parr[11][6] || 0) + (parr[12][4] || 0) +
-      (parr[13][5] || 0) + (parr[14][4] || 0);
-    const defTh =
-      (parr[0][6] || 0) + (parr[1][6] || 0) + (parr[2][6] || 0) + (parr[3][6] || 0) +
-      (parr[8][7] || 0) + (parr[9][7] || 0) + (parr[11][7] || 0) + (parr[13][6] || 0) +
-      (parr[14][5] || 0);
-    const defSize = defImp + defTh || 1;
-    const defRatioImp = Math.trunc((defImp / defSize) * 100);
-    const defRatioTh = 100 - defRatioImp;
-
-    const defBase = (parr[0][4] || 0) + (parr[1][4] || 0) + (parr[2][4] || 0) + (parr[3][4] || 0);
-    const punch = Math.trunc((parr[2][7] || 0) * (corr[1] || 1));
-
-    const lastWalk = ((parr[3][8] || 0) * (parr[14][7] || 1) * (corr[10] || 1)).toFixed(2);
-    const lastTurnG = ((parr[3][10] || 0) * (corr[12] || 1)).toFixed?.(2) || String(parr[3][10] || 0);
-    const lastTurnA = ((parr[3][11] || 0) * (corr[13] || 1)).toFixed?.(2) || String(parr[3][11] || 0);
-
-    const genGain = ((parr[8][4] || 0) * (corr[3] || 1)).toFixed(1);
-    const genRed = parr[8][8] || 0;
-    const genRec = ((parr[8][4] || 0) * (corr[2] || 1)).toFixed(1);
-
-    const boostWaste = ((parr[9][2] || 0) * (corr[9] || 1)).toFixed(1);
-    const boostSpeed = ((parr[9][3] || 0) * (corr[8] || 1) + (arr[15] === 7 ? 10 : 0)).toFixed(1);
-    const boostGrav = (parr[9][8] != null ? Number(parr[9][8]) : 0).toFixed(2);
-    const boostAccel = ((parr[9][4] || 0) * (corr[7] || 1) + (arr[15] === 7 ? 10 : 0)).toFixed(1);
+    const boostGrav =
+      parr[9][8] != null ? Number(parr[9][8]).toFixed(2) : "-";
 
     // --- Render INFORMATION ---
     const spans = $$("#INFORMATION [data-cell]");
@@ -446,37 +798,37 @@
       weightEl.style.outline = wt > wc ? "solid 1px red" : "none";
     }
 
-    const burmEl = $("#BURM ");
+    const burmEl = $("#BURM");
     if (burmEl) setText(burmEl, `${state.burmRate}%`);
 
     // --- Render GENERAL tables ---
     const tables = $$("#GENERAL table");
     
-        setHtmlTrusted($cell('防御比'), `<span class="impulse">${defRatioImp}</span>:<span class="thermal">${defRatioTh}</span>`);
+        setHtmlTrusted($cell('防御比'), `<span class="impulse">${def_ratio_impulse}</span>:<span class="thermal">${def_ratio_thermal}</span>`);
         setHtmlTrusted($cell('HP比'), `<span class="framehp">${hpRatioFrame}</span>:<span class="innerhp">${hpRatioInner}</span>`);
-        setText($cell('総HP'), hpTotal);
-        setText($cell('外装HP'), hpFrame);
-        setText($cell('内部HP'), hpInner);
+        setText($cell('総HP'), last_HP_total);
+        setText($cell('外装HP'), last_HP_frame);
+        setText($cell('内部HP'), last_HP_inner);
         setText($cell('総EP'), energyTotal(true));
-        setText($cell('基本防御'), defBase);
-        setText($cell('耐熱防御'), Math.trunc(defBase * (defRatioTh / 100)));
-        setText($cell('耐衝撃防御'), Math.trunc(defBase * (defRatioImp / 100)));
-        setText($cell('パンチ力'), punch);
+        setText($cell('基本防御'), last_def_total);
+        setText($cell('耐熱防御'), last_def_total_thermal);
+        setText($cell('耐衝撃防御'), last_def_total_impulse);
+        setText($cell('パンチ力'), last_punch);
         
         setText($cell('最大積載'), weightCapacity());
-        setText($cell('歩行速度'), lastWalk);
-        setText($cell('地上旋回'), lastTurnG);
-        setText($cell('空中旋回'), lastTurnA);
+        setText($cell('歩行速度'), last_st_walk);
+        setText($cell('地上旋回'), last_st_turn_rand);
+        setText($cell('空中旋回'), last_st_turn_air);
         
-        setText($cell('出力'), genGain);
+        setText($cell('出力'), last_st_genererater_gain);
         setText($cell('最大EP'), energyCapacity());
-        setText($cell('限界域'), genRed);
-        setText($cell('回復力'), genRec);
+        setText($cell('限界域'), last_st_genererater_redzone);
+        setText($cell('回復力'), last_st_genererater);
         
-        setText($cell('消費出力'), boostWaste);
-        setText($cell('最高速度'), boostSpeed);
+        setText($cell('消費出力'), last_st_booster_waste);
+        setText($cell('最高速度'), last_st_booster_speed);
         setText($cell('重力補正'), boostGrav);
-        setText($cell('加速力'), boostAccel);
+        setText($cell('加速力'), last_st_booster_accel);
         
         setText($cell('索敵範囲'), parr[11][3]);
         setText($cell('タイプ'), RADAR_TYPES[parr[11][4]] || "-");
